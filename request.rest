@@ -1,0 +1,8 @@
+### Lunos - Discover Models
+GET http://localhost:4000/api/discover-models
+
+### Test Lunos
+GET http://localhost:4000/api/test-lunos
+
+### Test Mail
+GET http://localhost:4000/api/test-mail
