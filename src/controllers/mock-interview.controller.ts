@@ -50,3 +50,19 @@ export const getInterviewLogs = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getInterviewFeedback = async (req: Request, res: Response) => {
+  try {
+    const { jobDataId } = req.params;
+    const feedback = await service.getInterviewFeedback(jobDataId);
+    return res.status(200).json({
+      success: true,
+      data: feedback,
+    });
+  } catch (error: any) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
