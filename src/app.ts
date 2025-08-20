@@ -1,12 +1,9 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 
 import testLunosRouter from "./routes/lunos.route";
 import testMailRouter from "./routes/mail.route";
 import generateDocRouter from "./routes/generate-doc.route";
-
-dotenv.config();
 
 const app = express();
 

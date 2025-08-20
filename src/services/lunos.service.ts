@@ -1,15 +1,14 @@
 import { LunosClient } from "@lunos/client";
 import { UserData } from "../interfaces/interface";
+import lunos from "../lib/lunos";
 
 export async function discoverModels() {
-  const client = new LunosClient({ apiKey: process.env.LUNOS_API_KEY });
-  const models = await client.models.getModels();
+  const models = await lunos.models.getModels();
   return models;
 }
 
 export async function generateText(prompt: string): Promise<string> {
-  const client = new LunosClient({ apiKey: process.env.LUNOS_API_KEY });
-  const resp = await client.chat.createCompletion({
+  const resp = await lunos.chat.createCompletion({
     model: "openai/gpt-4o-mini",
     messages: [{ role: "user", content: prompt }],
     max_tokens: 150,
@@ -48,9 +47,7 @@ export async function generateDocs(user: UserData) {
   Return JSON with fields: cvText, coverLetter, summary
   `;
 
-  const client = new LunosClient({ apiKey: process.env.LUNOS_API_KEY });
-
-  const completion = await client.chat.createCompletion({
+  const completion = await lunos.chat.createCompletion({
     model: "openai/gpt-4o-mini",
     messages: [
       { role: "system", content: "You are a document generator assistant." },
