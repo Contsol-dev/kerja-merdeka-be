@@ -18,3 +18,19 @@ export const startInterview = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const answerInterview = async (req: Request, res: Response) => {
+  try {
+    const { jobDataId, answer } = req.body;
+    const result = await service.answerQuestion(jobDataId, answer);
+    return res.status(201).json({
+      success: true,
+      data: result,
+    });
+  } catch (error: any) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

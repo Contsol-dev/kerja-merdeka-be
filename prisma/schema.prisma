@@ -78,6 +78,7 @@ model JobData {
 
   results    GeneratedResult[]
   interviews InterviewLog[]
+  contexts   UserJobContext?
 }
 
 model GeneratedResult {
@@ -101,8 +102,15 @@ model Log {
 model InterviewLog {
   id        String   @id @default(cuid())
   question  String
-  answer    String
+  answer    String?
   createdAt DateTime @default(now())
   jobDataId String
   job       JobData  @relation(fields: [jobDataId], references: [id])
+}
+
+model UserJobContext {
+  id        String  @id @default(cuid())
+  jobDataId String  @unique
+  context   String
+  job       JobData @relation(fields: [jobDataId], references: [id], onDelete: Cascade)
 }
