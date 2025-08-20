@@ -12,8 +12,8 @@ POST http://localhost:4000/api/doc/generate
 Content-Type: application/json
 
 {
-  "userId": "cmejec9fp0000tgasq66f99sh",
-  "jobDataId": "cmejec9gs000atgashnpg0d6f"
+  "userId": "cmek1ycoh0000tgfsijc7m1j6",
+  "jobDataId": "cmek1ycp7000atgfspgrd37rn"
 }
 
 ### Test Start Interview (Replace with actual ID)
@@ -21,6 +21,21 @@ POST http://localhost:4000/api/interview/start
 Content-Type: application/json
 
 {
-  "userId": "cmejec9fp0000tgasq66f99sh",
-  "jobDataId": "cmejec9gs000atgashnpg0d6f"
+  "userId": "cmek1ycoh0000tgfsijc7m1j6",
+  "jobDataId": "cmek1ycp7000atgfspgrd37rn"
 }
+
+### Test Answer Interview (Replace with actual ID and answer)
+POST http://localhost:4000/api/interview/answer
+Content-Type: application/json
+
+{
+  "jobDataId": "cmek1ycp7000atgfspgrd37rn",
+  "answer": "One particularly challenging technical problem I faced was a performance bottleneck in a Node.js application that used PostgreSQL. The API was experiencing high latency spikes during peak hours, but the server and database CPU usage were normal. After some investigation, I discovered the issue was related to database connection pooling. The application was creating a new connection for almost every single request instead of reusing existing ones, which was causing significant overhead. To diagnose this, I used PostgreSQL's pg_stat_activity view to monitor connection counts and identify the pattern. The solution involved implementing a proper connection pool with pg-pool and configuring it to maintain a minimum number of idle connections. This change significantly improved the application's performance and stability under heavy load."
+}
+
+### Get Interview Logs (Replace with actual ID)
+GET http://localhost:4000/api/interview/logs/cmek1ycp7000atgfspgrd37rn
+
+### Get Interview Feedback (Replace with actual ID)
+GET http://localhost:4000/api/interview/feedback/cmek1ycp7000atgfspgrd37rn

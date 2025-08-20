@@ -3,6 +3,8 @@ import { UserService } from "./user.service";
 import { UserData } from "../interfaces/interface";
 import { chatCompletion } from "./unli.service";
 import prisma from "../lib/prisma";
+import { createCompletionJson } from "./lunos.service";
+import { ChatMessage } from "@lunos/client";
 
 export class MockInterviewService {
   private userService: UserService;
@@ -64,7 +66,7 @@ export class MockInterviewService {
     `;
 
       const userJobContext = this.formatuserJobContext(user);
-      await prisma.userJobContext.create({
+      await prisma.interviewInfo.create({
         data: {
           jobDataId: jobDataId,
           context: userJobContext,
@@ -103,11 +105,12 @@ export class MockInterviewService {
 
   async answerQuestion(jobDataId: string, answer: string) {
     try {
-      const userJobContext = await prisma.userJobContext.findUnique({
+      const interviewInfo = await prisma.interviewInfo.findUnique({
         where: { jobDataId: jobDataId },
+        select: { context: true },
       });
 
-      if (!userJobContext) throw new Error("User job context not found");
+      if (!interviewInfo) throw new Error("User job context not found");
 
       const lastLog = await prisma.interviewLog.findFirst({
         where: { jobDataId: jobDataId, answer: null },
@@ -126,7 +129,7 @@ export class MockInterviewService {
           role: "system",
           content: "You are an interviewer conducting a job interview.",
         },
-        { role: "user", content: userJobContext.context },
+        { role: "user", content: interviewInfo.context },
         { role: "assistant", content: lastLog.question },
         { role: "user", content: answer },
         {
@@ -160,6 +163,61 @@ export class MockInterviewService {
       return logs;
     } catch (error: any) {
       throw new Error("Failed to get interview logs: " + error.message);
+    }
+  }
+
+  async getInterviewFeedback(jobDataId: string) {
+    try {
+      const interviewInfo = await prisma.interviewInfo.findUnique({
+        where: { jobDataId: jobDataId },
+      });
+
+      if (interviewInfo?.feedback) {
+        return {
+          feedback: interviewInfo.feedback,
+          score: interviewInfo.score,
+        };
+      }
+
+      const logs = await this.getInterviewLogs(jobDataId);
+
+      if (!logs.length) throw new Error("No interview logs found");
+
+      const qaPairs = logs
+        .map((log) => `Q: ${log.question}\nA: ${log.answer || "No answer yet"}`)
+        .join("\n\n");
+
+      const messages: ChatMessage[] = [
+        {
+          role: "system",
+          content: `
+        You are an experienced HR interviewer. 
+        You will evaluate the candidate's interview answers. 
+        Provide:
+        1. A detailed feedback (strengths, weaknesses, suggestions).
+        2. A score (0-100) based on the overall performance.
+        Output in JSON format: { "feedback": "...", "score": number }
+        `.trim(),
+        },
+        {
+          role: "user",
+          content: `Here are the interview Q&A logs:\n\n${qaPairs}`,
+        },
+      ];
+
+      const { feedback, score } = await createCompletionJson(messages);
+
+      const updatedInterviewInfo = await prisma.interviewInfo.update({
+        where: { jobDataId: jobDataId },
+        data: { feedback, score },
+      });
+
+      return {
+        feedback: updatedInterviewInfo.feedback,
+        score: updatedInterviewInfo.score,
+      };
+    } catch (error: any) {
+      throw new Error("Failed to get interview feedback: " + error.message);
     }
   }
 }

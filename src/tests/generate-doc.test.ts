@@ -1,11 +1,14 @@
 import request from "supertest";
 import app from "../app";
 
+const userId = "cmejpc7dg0000tgiojc22re3s"; // replace with actual user ID
+const jobDataId = "cmejpc7ek000atgioq8x0tvdz"; // replace with actual job data ID
+
 describe("POST /api/doc/generate", () => {
   it("should generate CV and Cover Letter for user", async () => {
     const res = await request(app).post("/api/doc/generate").send({
-      userId: "cmejec9fp0000tgasq66f99sh", // replace with actual user ID
-      jobDataId: "cmejec9gs000atgashnpg0d6f", // replace with actual job data ID
+      userId: userId,
+      jobDataId: jobDataId,
     });
 
     expect(res.statusCode).toBe(201);
