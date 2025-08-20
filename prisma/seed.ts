@@ -1,0 +1,88 @@
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+async function main() {
+  await prisma.interviewLog.deleteMany();
+  await prisma.generatedResult.deleteMany();
+  await prisma.jobData.deleteMany();
+  await prisma.skill.deleteMany();
+  await prisma.experience.deleteMany();
+  await prisma.education.deleteMany();
+  await prisma.log.deleteMany();
+  await prisma.user.deleteMany();
+
+  const user = await prisma.user.create({
+    data: {
+      email: "iqbal@example.com",
+      name: "Iqbal Ghozy",
+      phone: "+628123456789",
+      linkedin: "https://linkedin.com/in/iqbalghozy",
+      github: "https://github.com/iqbalghozy",
+    },
+  });
+
+  await prisma.education.create({
+    data: {
+      degree: "Bachelor of Computer Science",
+      fieldOfStudy: "Software Engineering",
+      institution: "Universitas Indonesia",
+      startDate: new Date("2018-08-01"),
+      endDate: new Date("2022-07-31"),
+      userId: user.id,
+    },
+  });
+
+  await prisma.experience.createMany({
+    data: [
+      {
+        title: "Backend Developer",
+        company: "Tech Solutions",
+        description: "Developed REST APIs using Node.js and PostgreSQL",
+        startDate: new Date("2022-08-01"),
+        endDate: new Date("2023-12-31"),
+        userId: user.id,
+      },
+      {
+        title: "Fullstack Developer",
+        company: "Startup Hub",
+        description: "Built web apps with React and Express",
+        startDate: new Date("2024-01-01"),
+        endDate: new Date("2025-01-31"),
+        userId: user.id,
+      },
+    ],
+  });
+
+  await prisma.skill.createMany({
+    data: [
+      { name: "Node.js", group: "PROGRAMMING", userId: user.id },
+      { name: "React.js", group: "PROGRAMMING", userId: user.id },
+      { name: "PostgreSQL", group: "PROGRAMMING", userId: user.id },
+      { name: "Docker", group: "PROGRAMMING", userId: user.id },
+    ],
+  });
+
+  const job = await prisma.jobData.create({
+    data: {
+      jobTitle: "Software Engineer",
+      description:
+        "We are looking for a passionate Software Engineer to join our dynamic team...",
+      userId: user.id,
+    },
+  });
+
+  console.log("✅ Seed data berhasil dibuat!");
+  console.log("User ID:", user.id);
+  console.log("Job ID:", job.id);
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });

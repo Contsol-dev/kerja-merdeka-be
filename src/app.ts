@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 import testLunosRouter from "./routes/lunos.route";
 import testMailRouter from "./routes/mail.route";
+import generateDocRouter from "./routes/generate-doc.route";
 
 dotenv.config();
 
@@ -14,5 +15,6 @@ app.use(express.json());
 
 app.use("/api", testLunosRouter);
 app.use("/api", testMailRouter);
+app.use("/api", generateDocRouter);
 
 export default app;
