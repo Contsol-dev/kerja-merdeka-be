@@ -76,9 +76,9 @@ model JobData {
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  results    GeneratedResult[]
-  interviews InterviewLog[]
-  contexts   UserJobContext?
+  results       GeneratedResult[]
+  interviews    InterviewLog[]
+  interviewInfo InterviewInfo?
 }
 
 model GeneratedResult {
@@ -108,9 +108,11 @@ model InterviewLog {
   job       JobData  @relation(fields: [jobDataId], references: [id])
 }
 
-model UserJobContext {
+model InterviewInfo {
   id        String  @id @default(cuid())
   jobDataId String  @unique
   context   String
+  feedback  String?
+  score     Int?
   job       JobData @relation(fields: [jobDataId], references: [id], onDelete: Cascade)
 }
