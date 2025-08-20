@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  // output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -39,27 +39,33 @@ model Education {
   startDate    DateTime
   endDate      DateTime
   userId       String
-  user         User     @relation(fields: [userId], references: [id])
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Experience {
   id          String   @id @default(cuid())
   title       String
   company     String
-  position    String
   description String?
   startDate   DateTime
   endDate     DateTime
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum SkillGroup {
+  PROGRAMMING
+  LANGUAGE
+  MANAGEMENT
+  OTHER
 }
 
 model Skill {
-  id     String @id @default(cuid())
+  id     String     @id @default(cuid())
   name   String
-  group  String
+  group  SkillGroup
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model JobData {
@@ -68,7 +74,7 @@ model JobData {
   description String
   createdAt   DateTime @default(now())
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   results    GeneratedResult[]
   interviews InterviewLog[]
@@ -89,7 +95,7 @@ model Log {
   action    String
   createdAt DateTime @default(now())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model InterviewLog {

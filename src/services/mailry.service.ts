@@ -1,4 +1,5 @@
 import axios from "axios";
+import env from "../configs/env.config";
 
 interface SendMailPayload {
   emailId: string;
@@ -25,7 +26,7 @@ export async function sendMail(payload: SendMailPayload) {
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.MAILRY_API_KEY}`,
+          Authorization: `Bearer ${env.MAILRY.API_KEY}`,
           "Content-Type": "application/json",
         },
       }
