@@ -8,7 +8,7 @@ This is the backend service for the Kerja Merdeka project. It provides APIs and 
 
 - RESTful API endpoints
 - Authentication and authorization
-- Database integration
+- Database integration with Prisma
 - Error handling and logging
 
 ## Installation
@@ -24,6 +24,17 @@ This is the backend service for the Kerja Merdeka project. It provides APIs and 
 3. Install dependencies:
    ```bash
    npm install
+   ```
+
+## Prisma Setup
+
+1. Generate Prisma client:
+   ```bash
+   npx prisma generate
+   ```
+2. Apply database migrations:
+   ```bash
+   npx prisma migrate dev
    ```
 
 ## Usage
