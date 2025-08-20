@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { generateDocs } from "./lunos.service";
 
 const prisma = new PrismaClient();
 
@@ -19,21 +20,14 @@ export class GenerateDocService {
     if (!user) throw new Error("User not found");
     if (!user.jobs.length) throw new Error("Job data not found");
 
-    const job = user.jobs[0];
-
-    // TODO: Implement AI Integration (Lunos)
-    const cvText = `CV for ${user.name}\nSkills: ${user.skills
-      .map((s) => s.name)
-      .join(", ")}`;
-    const coverLetter = `Dear Hiring Manager,\nI am excited to apply for ${job.jobTitle}.\nRegards, ${user.name}`;
-    const summary = `Profile: ${user.name} with ${user.experiences.length} experiences.`;
+    const { cvText, coverLetter, summary } = await generateDocs(user);
 
     const result = await prisma.generatedResult.create({
       data: {
         cvText,
         coverLetter,
         summary,
-        jobDataId: job.id,
+        jobDataId: user.jobs[0].id,
       },
     });
 

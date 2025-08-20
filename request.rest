@@ -7,11 +7,11 @@ GET http://localhost:4000/api/test-lunos
 ### Test Mail
 GET http://localhost:4000/api/test-mail
 
-### Test Generate Document
+### Test Generate Document (Replace with actual ID)
 POST http://localhost:4000/api/generate-doc
 Content-Type: application/json
 
 {
-  "userId": "cmejec9fp0000tgasq66f99sh", // replace with actual user ID
-  "jobDataId": "cmejec9gs000atgashnpg0d6f" // replace with actual job data ID
+  "userId": "cmejec9fp0000tgasq66f99sh",
+  "jobDataId": "cmejec9gs000atgashnpg0d6f"
 }

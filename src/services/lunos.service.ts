@@ -1,4 +1,5 @@
 import { LunosClient } from "@lunos/client";
+import { UserData } from "../interfaces/interface";
 
 export async function discoverModels() {
   const client = new LunosClient({ apiKey: process.env.LUNOS_API_KEY });
@@ -16,4 +17,48 @@ export async function generateText(prompt: string): Promise<string> {
   });
 
   return resp.choices?.[0].message?.content || "No output";
+}
+
+export async function generateDocs(user: UserData) {
+  const job = user.jobs[0];
+
+  const prompt = `
+  Generate a CV, Cover Letter, and a Summary for the following user applying to the specified job:
+  User Data:
+  Name: ${user.name}
+  Email: ${user.email}
+  Education: ${user.educations
+    .map(
+      (edu) =>
+        `${edu.degree} in ${edu.fieldOfStudy} from ${edu.institution} (${edu.startDate} - ${edu.endDate})`
+    )
+    .join(", ")}
+  Experience: ${user.experiences
+    .map(
+      (exp) =>
+        `${exp.title} at ${exp.company} (${exp.startDate} - ${exp.endDate})`
+    )
+    .join(", ")}
+  Skills: ${user.skills.map((skill) => skill.name).join(", ")}
+  
+  Job Data:
+  Title: ${job.jobTitle}
+  Description: ${job.description}
+  
+  Return JSON with fields: cvText, coverLetter, summary
+  `;
+
+  const client = new LunosClient({ apiKey: process.env.LUNOS_API_KEY });
+
+  const completion = await client.chat.createCompletion({
+    model: "openai/gpt-4o-mini",
+    messages: [
+      { role: "system", content: "You are a document generator assistant." },
+      { role: "user", content: prompt },
+    ],
+    response_format: { type: "json_object" },
+  });
+
+  const text = completion.choices[0].message.content;
+  return JSON.parse(text ?? "{}");
 }
