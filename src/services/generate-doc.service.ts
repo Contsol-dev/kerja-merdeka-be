@@ -1,8 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../lib/prisma";
 import { generateDocs } from "./lunos.service";
-
-const prisma = new PrismaClient();
-
 export class GenerateDocService {
   async generate(userId: string, jobDataId: string) {
     const user = await prisma.user.findUnique({
