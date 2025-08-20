@@ -26,6 +26,10 @@ export async function generateDocs(user: UserData) {
   User Data:
   Name: ${user.name}
   Email: ${user.email}
+  Phone: ${user.phone}
+  Address: ${user.address}
+  LinkedIn: ${user.linkedin}
+  GitHub: ${user.github}
   Education: ${user.educations
     .map(
       (edu) =>
@@ -35,13 +39,17 @@ export async function generateDocs(user: UserData) {
   Experience: ${user.experiences
     .map(
       (exp) =>
-        `${exp.title} at ${exp.company} (${exp.startDate} - ${exp.endDate})`
+        `${exp.status} ${exp.title} ${exp.type} at ${exp.company} (${exp.startDate} - ${exp.endDate})`
     )
     .join(", ")}
-  Skills: ${user.skills.map((skill) => skill.name).join(", ")}
-  
+  Skills: ${user.skills
+    .map((skill) => `${skill.level} ${skill.name}`)
+    .join(", ")}
+
   Job Data:
   Title: ${job.jobTitle}
+  Company: ${job.company}
+  Location: ${job.location}
   Description: ${job.description}
   
   Return JSON with fields: cvText, coverLetter, summary
