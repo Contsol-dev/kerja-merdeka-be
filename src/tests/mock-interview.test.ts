@@ -33,6 +33,18 @@ describe("POST /api/interview/start -> /api/interview/answer", () => {
   }, 15000);
 });
 
+describe("GET /api/interview/logs/:jobDataId", () => {
+  it("should return existing interview logs", async () => {
+    const res = await request(app).get(`/api/interview/logs/${jobDataId}`);
+
+    console.log("Response:\n", res.body);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toBeInstanceOf(Array);
+  });
+});
+
 describe("POST /api/interview (invalid)", () => {
   it("should fail if user not found", async () => {
     const res = await request(app).post("/api/interview/start").send({

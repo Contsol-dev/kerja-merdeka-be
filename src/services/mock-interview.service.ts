@@ -149,4 +149,17 @@ export class MockInterviewService {
       throw new Error("Failed to answer question: " + error.message);
     }
   }
+
+  async getInterviewLogs(jobDataId: string) {
+    try {
+      const logs = await prisma.interviewLog.findMany({
+        where: { jobDataId },
+        orderBy: { createdAt: "asc" },
+      });
+
+      return logs;
+    } catch (error: any) {
+      throw new Error("Failed to get interview logs: " + error.message);
+    }
+  }
 }

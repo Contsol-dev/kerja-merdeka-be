@@ -34,3 +34,19 @@ export const answerInterview = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getInterviewLogs = async (req: Request, res: Response) => {
+  try {
+    const { jobDataId } = req.params;
+    const logs = await service.getInterviewLogs(jobDataId);
+    return res.status(200).json({
+      success: true,
+      data: logs,
+    });
+  } catch (error: any) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
