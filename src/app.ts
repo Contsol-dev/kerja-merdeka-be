@@ -1,17 +1,13 @@
 import express from "express";
 import cors from "cors";
 
-import testLunosRouter from "./routes/lunos.route";
-import testMailRouter from "./routes/mail.route";
-import generateDocRouter from "./routes/generate-doc.route";
+import appRouter from "./routes/app.route";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api", testLunosRouter);
-app.use("/api", testMailRouter);
-app.use("/api", generateDocRouter);
+app.use("/api", appRouter);
 
 export default app;
