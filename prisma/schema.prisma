@@ -19,6 +19,7 @@ model User {
   email     String   @unique
   name      String
   phone     String?
+  address   String?
   linkedin  String?
   github    String?
   createdAt DateTime @default(now())
@@ -42,39 +43,61 @@ model Education {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+enum ExperienceType {
+  WORK
+  ORGANIZATION
+  VOLUNTEER
+  EVENT
+}
+
+enum ExperienceStatus {
+  FULL_TIME
+  PART_TIME
+  INTERNSHIP
+  CONTRACT
+  HONORARY
+  OUTSOURCED
+}
+
 model Experience {
-  id          String   @id @default(cuid())
+  id          String           @id @default(cuid())
+  type        ExperienceType
+  status      ExperienceStatus
   title       String
   company     String
   description String?
   startDate   DateTime
   endDate     DateTime
   userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-enum SkillGroup {
-  PROGRAMMING
-  LANGUAGE
-  MANAGEMENT
-  OTHER
+enum SkillLevel {
+  BEGINNER
+  INTERMEDIATE
+  EXPERT
+  SPECIALIST
 }
 
 model Skill {
   id     String     @id @default(cuid())
   name   String
-  group  SkillGroup
+  level  SkillLevel
   userId String
   user   User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model JobData {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
+  link        String
   jobTitle    String
-  description String
-  createdAt   DateTime @default(now())
+  company     String
+  description String?
+  location    String?
+  deadline    DateTime?
+  createdAt   DateTime  @default(now())
   userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   results       GeneratedResult[]
   interviews    InterviewLog[]
