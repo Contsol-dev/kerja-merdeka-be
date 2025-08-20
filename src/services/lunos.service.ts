@@ -1,4 +1,4 @@
-import { LunosClient } from "@lunos/client";
+import { ChatMessage, LunosClient } from "@lunos/client";
 import { UserData } from "../interfaces/interface";
 import lunos from "../lib/lunos";
 
@@ -53,6 +53,19 @@ export async function generateDocs(user: UserData) {
       { role: "system", content: "You are a document generator assistant." },
       { role: "user", content: prompt },
     ],
+    response_format: { type: "json_object" },
+  });
+
+  const text = completion.choices[0].message.content;
+  return JSON.parse(text ?? "{}");
+}
+
+export async function createCompletionJson(
+  message: ChatMessage[]
+): Promise<any> {
+  const completion = await lunos.chat.createCompletion({
+    model: "openai/gpt-4o-mini",
+    messages: message,
     response_format: { type: "json_object" },
   });
 

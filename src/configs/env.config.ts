@@ -8,7 +8,12 @@ export const env = {
   DATABASE_URL: process.env.DATABASE_URL,
   MAILRY: {
     API_KEY: process.env.MAILRY_API_KEY,
+    API_URL: "https://api.mailry.co/ext",
     EMAIL_ID: process.env.MAILRY_EMAIL_ID,
+  },
+  UNLI: {
+    API_KEY: process.env.UNLI_API_KEY,
+    API_URL: "https://api.unli.dev/v1",
   },
 };
 
