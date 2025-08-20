@@ -12,7 +12,8 @@ describe("POST /api/generate-doc", () => {
     expect(res.body.success).toBe(true);
     expect(res.body.data).toHaveProperty("cvText");
     expect(res.body.data).toHaveProperty("coverLetter");
-  });
+    expect(res.body.data).toHaveProperty("summary");
+  }, 15000);
 
   it("should fail if user not found", async () => {
     const res = await request(app).post("/api/generate-doc").send({
