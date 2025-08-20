@@ -1,10 +1,11 @@
-import { SkillGroup } from "@prisma/client";
+import { ExperienceStatus, ExperienceType, SkillLevel } from "@prisma/client";
 
 export interface UserData {
   id: string;
   email: string;
   name: string;
   phone: string | null;
+  address: string | null;
   linkedin: string | null;
   github: string | null;
   createdAt: Date;
@@ -12,9 +13,13 @@ export interface UserData {
   jobs: {
     id: string;
     createdAt: Date;
-    jobTitle: string;
-    description: string;
+    link: string;
     userId: string;
+    jobTitle: string;
+    company: string;
+    description: string | null;
+    location: string | null;
+    deadline: Date | null;
   }[];
   educations: {
     id: string;
@@ -27,17 +32,19 @@ export interface UserData {
   }[];
   experiences: {
     id: string;
-    description: string | null;
+    type: ExperienceType;
     userId: string;
+    company: string;
+    description: string | null;
     startDate: Date;
     endDate: Date;
+    status: ExperienceStatus;
     title: string;
-    company: string;
   }[];
   skills: {
     id: string;
     name: string;
     userId: string;
-    group: SkillGroup;
+    level: SkillLevel;
   }[];
 }

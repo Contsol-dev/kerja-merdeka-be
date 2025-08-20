@@ -1,4 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import {
+  PrismaClient,
+  ExperienceType,
+  ExperienceStatus,
+  SkillLevel,
+} from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -36,6 +41,8 @@ async function main() {
   await prisma.experience.createMany({
     data: [
       {
+        type: ExperienceType.WORK,
+        status: ExperienceStatus.FULL_TIME,
         title: "Backend Developer",
         company: "Tech Solutions",
         description: "Developed REST APIs using Node.js and PostgreSQL",
@@ -44,6 +51,8 @@ async function main() {
         userId: user.id,
       },
       {
+        type: ExperienceType.WORK,
+        status: ExperienceStatus.FULL_TIME,
         title: "Fullstack Developer",
         company: "Startup Hub",
         description: "Built web apps with React and Express",
@@ -56,19 +65,23 @@ async function main() {
 
   await prisma.skill.createMany({
     data: [
-      { name: "Node.js", group: "PROGRAMMING", userId: user.id },
-      { name: "React.js", group: "PROGRAMMING", userId: user.id },
-      { name: "PostgreSQL", group: "PROGRAMMING", userId: user.id },
-      { name: "Docker", group: "PROGRAMMING", userId: user.id },
+      { name: "Node.js", level: SkillLevel.EXPERT, userId: user.id },
+      { name: "React.js", level: SkillLevel.INTERMEDIATE, userId: user.id },
+      { name: "PostgreSQL", level: SkillLevel.EXPERT, userId: user.id },
+      { name: "Docker", level: SkillLevel.BEGINNER, userId: user.id },
     ],
   });
 
   const job = await prisma.jobData.create({
     data: {
+      link: "https://company.com/jobs/software-engineer",
       jobTitle: "Software Engineer",
+      company: "Tech Solutions",
       description:
         "We are looking for a passionate Software Engineer to join our dynamic team...",
       userId: user.id,
+      location: "Jakarta",
+      deadline: new Date("2025-12-31"),
     },
   });
 
