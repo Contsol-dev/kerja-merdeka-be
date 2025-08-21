@@ -48,3 +48,25 @@ export interface UserData {
     level: SkillLevel;
   }[];
 }
+
+export interface UserGeneratedData extends UserData {
+  jobs: {
+    id: string;
+    createdAt: Date;
+    link: string;
+    userId: string;
+    jobTitle: string;
+    company: string;
+    description: string | null;
+    location: string | null;
+    deadline: Date | null;
+    results: {
+      jobDataId: string;
+      id: string;
+      createdAt: Date;
+      cvText: string;
+      coverLetter: string;
+      summary: string | null;
+    } | null;
+  }[];
+}
