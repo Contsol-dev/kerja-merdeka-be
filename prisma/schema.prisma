@@ -99,7 +99,7 @@ model JobData {
   userId      String
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  results       GeneratedResult[]
+  results       GeneratedResult?
   interviews    InterviewLog[]
   interviewInfo InterviewInfo?
 }
@@ -110,7 +110,7 @@ model GeneratedResult {
   coverLetter String
   summary     String?
   createdAt   DateTime @default(now())
-  jobDataId   String
+  jobDataId   String   @unique
   job         JobData  @relation(fields: [jobDataId], references: [id])
 }
 
