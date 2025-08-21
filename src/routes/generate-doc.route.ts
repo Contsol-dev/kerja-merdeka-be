@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { generateDoc } from "../controllers/generate-doc.controller";
+import { GenerateDocController } from "../controllers/generate-doc.controller";
 
 const router = Router();
 
-router.post("/generate", generateDoc);
+router.get("/:userId/:jobDataId", GenerateDocController.getResult);
 
 export default router;

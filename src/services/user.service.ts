@@ -36,6 +36,10 @@ export class UserService {
     });
 
     if (!user) throw new Error("User not found");
+    if (user.jobs.length === 0)
+      throw new Error("Job data not found for the user");
+    if (user.jobs[0].results === null)
+      throw new Error("User generated data not found");
 
     return user;
   }
