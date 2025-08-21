@@ -1,10 +1,11 @@
 import ejs from "ejs";
 import puppeteer from "puppeteer";
 import { Response } from "express";
-import { UserData, UserGeneratedData } from "../interfaces/interface";
+import { UserData } from "../interfaces/interface";
 import path from "path";
 import prisma from "../lib/prisma";
 import { generateDocs } from "./lunos.service";
+import { makeCacheKey, pdfCache } from "../lib/pdfCache";
 export class GenerateDocService {
   async generate(userData: UserData) {
     try {
@@ -39,6 +40,18 @@ export class GenerateDocService {
 
   async generateCv(userData: UserData, summary: string | null, res: Response) {
     try {
+      const cacheKey = makeCacheKey(userData.id, userData.jobs[0].id, "cv");
+
+      if (pdfCache.has(cacheKey)) {
+        const pdf = pdfCache.get(cacheKey);
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader(
+          "Content-Disposition",
+          `inline; filename=cv-${userData.id}.pdf`
+        );
+        return res.send(pdf);
+      }
+
       const html = await ejs.renderFile(
         path.join(__dirname, "..", "views", "cv.ejs"),
         { user: userData, summary }
@@ -49,6 +62,9 @@ export class GenerateDocService {
       await page.setContent(html);
       const pdf = await page.pdf({ format: "A4" });
       await browser.close();
+
+      pdfCache.set(cacheKey, pdf);
+      setTimeout(() => pdfCache.delete(cacheKey), 60 * 60 * 1000);
 
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
@@ -67,6 +83,22 @@ export class GenerateDocService {
     res: Response
   ) {
     try {
+      const cacheKey = makeCacheKey(
+        userData.id,
+        userData.jobs[0].id,
+        "coverLetter"
+      );
+
+      if (pdfCache.has(cacheKey)) {
+        const pdf = pdfCache.get(cacheKey);
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader(
+          "Content-Disposition",
+          `inline; filename=cv-${userData.id}.pdf`
+        );
+        return res.send(pdf);
+      }
+
       const html = await ejs.renderFile(
         path.join(__dirname, "..", "views", "cover-letter.ejs"),
         {
@@ -81,6 +113,9 @@ export class GenerateDocService {
       await page.setContent(html);
       const pdf = await page.pdf({ format: "A4" });
       await browser.close();
+
+      pdfCache.set(cacheKey, pdf);
+      setTimeout(() => pdfCache.delete(cacheKey), 60 * 60 * 1000);
 
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
