@@ -94,7 +94,7 @@ export class GenerateDocService {
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader(
           "Content-Disposition",
-          `inline; filename=cv-${userData.id}.pdf`
+          `inline; filename=cover-letter-${userData.id}.pdf`
         );
         return res.send(pdf);
       }
