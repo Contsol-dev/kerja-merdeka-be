@@ -7,15 +7,6 @@ GET http://localhost:4000/api/lunos/test-lunos
 ### Test Mail
 GET http://localhost:4000/api/lunos/test-mail
 
-### Generate Document (Replace with actual ID)
-POST http://localhost:4000/api/doc/generate
-Content-Type: application/json
-
-{
-  "userId": "cmek3xp7c0000tgn0450wdynu",
-  "jobDataId": "cmek3xp8o000atgn03g7yqebv"
-}
-
 ### Start Interview (Replace with actual ID)
 POST http://localhost:4000/api/interview/start
 Content-Type: application/json
@@ -40,8 +31,11 @@ GET http://localhost:4000/api/interview/logs/cmek3xp8o000atgn03g7yqebv
 ### Get Interview Feedback (Replace with actual ID)
 GET http://localhost:4000/api/interview/feedback/cmek3xp8o000atgn03g7yqebv
 
-### Download CV PDF (Replace with actual ID)
-GET http://localhost:4000/api/pdf/cv/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv
+### Get CV PDF (Replace with actual ID)
+GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=cv
 
-### Download Cover Letter PDF (Replace with actual ID)
-GET http://localhost:4000/api/pdf/cover-letter/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv
+### Get Cover Letter PDF (Replace with actual ID)
+GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=cover-letter
+
+### Get Summary (Replace with actual ID)
+GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=summary

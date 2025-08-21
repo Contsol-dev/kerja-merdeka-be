@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV - <%= user.name %></title>
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Georgia", serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f4f4f9;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #2c3e50;
+      }
+
+      header .name {
+        font-size: 28px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #2c3e50;
+      }
+
+      header .title {
+        font-size: 18px;
+        color: #555;
+        margin-top: 5px;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        font-size: 14px;
+        margin-top: 15px;
+      }
+
+      .contact-item {
+        color: #555;
+      }
+
+      .contact-item a {
+        color: #2c3e50;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .contact-item a:hover {
+        text-decoration: underline;
+      }
+
+      section {
+        margin-bottom: 30px;
+      }
+
+      .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2c3e50;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+      }
+
+      .education-item,
+      .job {
+        margin-bottom: 20px;
+      }
+
+      .degree,
+      .job-title {
+        font-weight: bold;
+        color: #2c3e50;
+        font-size: 18px;
+      }
+
+      .institution,
+      .company-info {
+        font-size: 14px;
+        color: #555;
+        font-style: italic;
+        margin-top: 5px;
+      }
+
+      .job-description {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #444;
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skill-category {
+        font-size: 14px;
+        color: #555;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      ul li {
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 12px;
+        color: #777;
+      }
+
+      footer a {
+        color: #2c3e50;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="name"><%= user.name %></div>
+      <div class="title"><%= user.address %></div>
+      <div class="contact-info">
+        <span class="contact-item"><strong>Phone:</strong> <%= user.phone %></span>
+        <span class="contact-item">
+          <strong>Email:</strong>
+          <a href="mailto:<%= user.email %>"><%= user.email %></a>
+        </span>
+        <% if (user.linkedin) { %>
+        <span class="contact-item">
+          <strong>LinkedIn:</strong>
+          <a href="<%= user.linkedin %>" target="_blank" rel="noopener noreferrer">Profile</a>
+        </span>
+        <% } %>
+        <% if (user.github) { %>
+        <span class="contact-item">
+          <strong>GitHub:</strong>
+          <a href="<%= user.github %>" target="_blank" rel="noopener noreferrer">Profile</a>
+        </span>
+        <% } %>
+        <% if (user.portfolio) { %>
+        <span class="contact-item">
+          <strong>Portfolio:</strong>
+          <a href="<%= user.portfolio %>" target="_blank" rel="noopener noreferrer">Website</a>
+        </span>
+        <% } %>
+      </div>
+    </header>
+
+    <section>
+      <h2 class="section-title">Summary</h2>
+      <p><%= summary %></p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Education</h2>
+      <% user.educations.forEach(edu => { %>
+      <div class="education-item">
+        <div class="degree"><%= edu.degree %> in <%= edu.fieldOfStudy %></div>
+        <div class="institution">
+          <%= edu.institution %> | <%= edu.startDate.toLocaleString('default', { month: 'short', year: 'numeric' }) %> - <%= edu.endDate.toLocaleString('default', { month: 'short', year: 'numeric' }) %>
+        </div>
+      </div>
+      <% }) %>
+    </section>
+
+    <section>
+      <h2 class="section-title">Experience</h2>
+      <% user.experiences.forEach(exp => { %>
+      <div class="job">
+        <div class="job-title"><%= exp.title %></div>
+        <div class="company-info">
+          <%= exp.company %> | <%= exp.location %> | <%= exp.startDate.toLocaleString('default', { month: 'short', year: 'numeric' }) %> - <%= exp.endDate.toLocaleString('default', { month: 'short', year: 'numeric' }) %>
+        </div>
+        <div class="job-description">
+          <p><%= exp.description %></p>
+        </div>
+      </div>
+      <% }) %>
+    </section>
+
+    <section>
+      <h2 class="section-title">Skills</h2>
+      <ul>
+        <% user.skills.forEach(skill => { %>
+        <li><%= skill.name %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <footer>
+      <p>&copy; <%= new Date().getFullYear() %> <%= user.name %>. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
