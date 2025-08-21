@@ -18,4 +18,25 @@ export class UserService {
 
     return user;
   }
+
+  async getUserGeneratedData(userId: string, jobDataId: string) {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        educations: true,
+        experiences: true,
+        skills: true,
+        jobs: {
+          where: { id: jobDataId },
+          include: {
+            results: true,
+          },
+        },
+      },
+    });
+
+    if (!user) throw new Error("User not found");
+
+    return user;
+  }
 }
