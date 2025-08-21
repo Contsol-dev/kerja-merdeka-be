@@ -126,6 +126,7 @@ export class GenerateDocService {
       res.send(pdf);
     } catch (error) {
       console.error("Error generating cover letter:", error);
+      res.status(500).json({ error: "Failed to generate cover letter" });
     }
   }
 }
