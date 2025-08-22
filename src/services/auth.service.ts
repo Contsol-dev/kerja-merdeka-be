@@ -2,6 +2,7 @@ import prisma from "../lib/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import env from "../configs/env.config";
+import { UnauthorizedError } from "../errors/auth.error";
 
 export class AuthService {
   async login(email: string, password: string) {
@@ -9,10 +10,10 @@ export class AuthService {
       const user = await prisma.user.findUnique({
         where: { email },
       });
-      if (!user) throw new Error("Invalid credentials");
+      if (!user) throw new UnauthorizedError("Invalid credentials");
 
       const valid = await bcrypt.compare(password, user.password);
-      if (!valid) throw new Error("Invalid credentials");
+      if (!valid) throw new UnauthorizedError("Invalid credentials");
 
       const expiresInMs =
         typeof env.JWT.EXPIRES_IN === "string"
@@ -32,7 +33,7 @@ export class AuthService {
         },
       };
     } catch (error: any) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -57,12 +58,10 @@ export class AuthService {
       });
 
       return {
-        user: {
-          id: user.id,
-          email: user.email,
-          phone: user.phone,
-          name: user.name,
-        },
+        id: user.id,
+        email: user.email,
+        phone: user.phone,
+        name: user.name,
       };
     } catch (error: any) {
       throw new Error(error);
