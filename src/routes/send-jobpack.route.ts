@@ -3,6 +3,6 @@ import { SendJobpackController } from "../controllers/send-jobpack.controller";
 
 const router = Router();
 
-router.get("/:userId/:jobDataId", SendJobpackController.sendJobpack);
+router.get("/:jobDataId", SendJobpackController.sendJobpack);
 
 export default router;

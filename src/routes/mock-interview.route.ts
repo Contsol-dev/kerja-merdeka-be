@@ -8,8 +8,8 @@ import {
 
 const router = Router();
 
-router.post("/start", startInterview); // Start a new mock interview
-router.post("/answer", answerInterview); // Answer interview question
+router.post("/start/:jobDataId", startInterview); // Start a new mock interview
+router.post("/answer/:jobDataId", answerInterview); // Answer interview question
 router.get("/logs/:jobDataId", getInterviewLogs); // Get interview logs
 router.get("/feedback/:jobDataId", getInterviewFeedback); // Get interview feedback
 

@@ -14,47 +14,40 @@ GET http://localhost:4000/api/lunos/test-mail
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Start Interview (Replace with actual ID)
-POST http://localhost:4000/api/interview/start
+POST http://localhost:4000/api/interview/start/cmem9lkxo000atg18ehsgm31e
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
-Content-Type: application/json
-
-{
-  "userId": "cmek3xp7c0000tgn0450wdynu",
-  "jobDataId": "cmek3xp8o000atgn03g7yqebv"
-}
 
 ### Answer Interview (Replace with actual ID and answer)
-POST http://localhost:4000/api/interview/answer
+POST http://localhost:4000/api/interview/answer/cmem9lkxo000atg18ehsgm31e
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 Content-Type: application/json
 
 {
-  "jobDataId": "cmek3xp8o000atgn03g7yqebv",
   "answer": "One particularly challenging technical problem I faced was a performance bottleneck in a Node.js application that used PostgreSQL. The API was experiencing high latency spikes during peak hours, but the server and database CPU usage were normal. After some investigation, I discovered the issue was related to database connection pooling. The application was creating a new connection for almost every single request instead of reusing existing ones, which was causing significant overhead. To diagnose this, I used PostgreSQL's pg_stat_activity view to monitor connection counts and identify the pattern. The solution involved implementing a proper connection pool with pg-pool and configuring it to maintain a minimum number of idle connections. This change significantly improved the application's performance and stability under heavy load."
 }
 
 ### Get Interview Logs (Replace with actual ID)
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
-GET http://localhost:4000/api/interview/logs/cmek3xp8o000atgn03g7yqebv
+GET http://localhost:4000/api/interview/logs/cmem9lkxo000atg18ehsgm31e
 
 ### Get Interview Feedback (Replace with actual ID)
-GET http://localhost:4000/api/interview/feedback/cmek3xp8o000atgn03g7yqebv
+GET http://localhost:4000/api/interview/feedback/cmem9lkxo000atg18ehsgm31e
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Get CV PDF (Replace with actual ID)
-GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=cv
+GET http://localhost:4000/api/doc/cmem9lkxo000atg18ehsgm31e?result=cv
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Get Cover Letter PDF (Replace with actual ID)
-GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=cover-letter
+GET http://localhost:4000/api/doc/cmem9lkxo000atg18ehsgm31e?result=cover-letter
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Get Summary (Replace with actual ID)
-GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=summary
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+GET http://localhost:4000/api/doc/cmem9lkxo000atg18ehsgm31e?result=summary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOWxrd2IwMDAwdGcxODA0dGMzNWZjIiwiaWF0IjoxNzU1ODM0MjAwLCJleHAiOjE3NTk0MzQyMDB9.PuwhuUfeSdZ6jXn4o1dcCOzOqhfG_sE7Hxwa8oPHU2w
 
 ### Send Jobpack (Replace with actual ID)
-GET http://localhost:4000/api/jobpack/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv
+GET http://localhost:4000/api/jobpack/cmem9lkxo000atg18ehsgm31e
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Register
@@ -74,6 +67,6 @@ POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "user@example.com",
-  "password": "password123"
+  "email": "iqbal@example.com",
+  "password": "kerjamerdeka123"
 }
