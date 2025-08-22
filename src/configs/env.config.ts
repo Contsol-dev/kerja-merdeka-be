@@ -15,6 +15,10 @@ export const env = {
     API_KEY: process.env.UNLI_API_KEY,
     API_URL: "https://api.unli.dev/v1",
   },
+  JWT: {
+    SECRET: process.env.JWT_SECRET || "",
+    EXPIRES_IN: process.env.JWT_EXPIRES_IN,
+  },
 };
 
 export default env;

@@ -1,17 +1,21 @@
-### CConnection Test
+### Connection Test
 GET http://localhost:4000/api/
 
 ### Lunos - Discover Models
 GET http://localhost:4000/api/lunos/discover-models
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Test Lunos
 GET http://localhost:4000/api/lunos/test-lunos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Test Mail
 GET http://localhost:4000/api/lunos/test-mail
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Start Interview (Replace with actual ID)
 POST http://localhost:4000/api/interview/start
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 Content-Type: application/json
 
 {
@@ -21,6 +25,7 @@ Content-Type: application/json
 
 ### Answer Interview (Replace with actual ID and answer)
 POST http://localhost:4000/api/interview/answer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 Content-Type: application/json
 
 {
@@ -29,19 +34,46 @@ Content-Type: application/json
 }
 
 ### Get Interview Logs (Replace with actual ID)
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 GET http://localhost:4000/api/interview/logs/cmek3xp8o000atgn03g7yqebv
 
 ### Get Interview Feedback (Replace with actual ID)
 GET http://localhost:4000/api/interview/feedback/cmek3xp8o000atgn03g7yqebv
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Get CV PDF (Replace with actual ID)
 GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=cv
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Get Cover Letter PDF (Replace with actual ID)
 GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=cover-letter
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Get Summary (Replace with actual ID)
 GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=summary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
 
 ### Send Jobpack (Replace with actual ID)
 GET http://localhost:4000/api/jobpack/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+
+### Register
+POST http://localhost:4000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "user@example.com",
+  "phone": "123-456-7890",
+  "password": "password123",
+  "confPassword": "password123"
+}
+
+### Login
+POST http://localhost:4000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
