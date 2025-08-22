@@ -2,7 +2,8 @@ import prisma from "../lib/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import env from "../configs/env.config";
-import { UnauthorizedError } from "../errors/auth.error";
+import { ApiError } from "../middlewares/error-handler.middleware";
+import logger from "../lib/logger";
 
 export class AuthService {
   async login(email: string, password: string) {
@@ -10,10 +11,10 @@ export class AuthService {
       const user = await prisma.user.findUnique({
         where: { email },
       });
-      if (!user) throw new UnauthorizedError("Invalid credentials");
+      if (!user) throw new ApiError(401, "Invalid credentials");
 
       const valid = await bcrypt.compare(password, user.password);
-      if (!valid) throw new UnauthorizedError("Invalid credentials");
+      if (!valid) throw new ApiError(401, "Invalid credentials");
 
       const expiresInMs =
         typeof env.JWT.EXPIRES_IN === "string"
@@ -33,7 +34,8 @@ export class AuthService {
         },
       };
     } catch (error: any) {
-      throw error;
+      logger.error(`Login error: ${error.message}`);
+      throw new ApiError(500, "Internal server error");
     }
   }
 
@@ -45,7 +47,8 @@ export class AuthService {
     phone: string
   ) {
     try {
-      if (password !== confPassword) throw new Error("Passwords do not match");
+      if (password !== confPassword)
+        throw new ApiError(400, "Passwords do not match");
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await prisma.user.create({
@@ -64,7 +67,8 @@ export class AuthService {
         name: user.name,
       };
     } catch (error: any) {
-      throw new Error(error);
+      logger.error(`Registration error: ${error.message}`);
+      throw new ApiError(500, "Internal server error");
     }
   }
 
@@ -72,7 +76,8 @@ export class AuthService {
     try {
       return jwt.verify(token, env.JWT.SECRET) as { userId: string };
     } catch (error: any) {
-      throw new Error(error);
+      logger.error(`Token verification error: ${error.message}`);
+      throw new ApiError(401, "Invalid token");
     }
   }
 }
