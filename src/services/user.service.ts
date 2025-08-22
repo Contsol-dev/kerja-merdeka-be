@@ -127,32 +127,37 @@ export class UserService {
       return user;
     } catch (error: any) {
       logger.error(`Error fetching user job data: ${error.message}`);
-      throw new ApiError(500, `Error fetching user job data: ${error.message}`);
+      throw error;
     }
   }
 
   async getUserGeneratedData(userId: string, jobDataId: string) {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      include: {
-        educations: true,
-        experiences: true,
-        skills: true,
-        jobs: {
-          where: { id: jobDataId },
-          include: {
-            results: true,
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+          educations: true,
+          experiences: true,
+          skills: true,
+          jobs: {
+            where: { id: jobDataId },
+            include: {
+              results: true,
+            },
           },
         },
-      },
-    });
+      });
 
-    if (!user) throw new ApiError(404, "User not found");
-    if (user.jobs.length === 0)
-      throw new ApiError(404, "Job data not found for the user");
-    if (user.jobs[0].results === null)
-      throw new ApiError(404, "User generated data not found");
+      if (!user) throw new ApiError(404, "User not found");
+      if (user.jobs.length === 0)
+        throw new ApiError(404, "Job data not found for the user");
+      if (user.jobs[0].results === null)
+        throw new ApiError(404, "User generated data not found");
 
-    return user;
+      return user;
+    } catch (error: any) {
+      logger.error(`Error fetching user generated data: ${error.message}`);
+      throw error;
+    }
   }
 }

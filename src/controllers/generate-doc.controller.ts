@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UserService } from "../services/user.service";
 import { GenerateDocService } from "../services/generate-doc.service";
 import { AuthRequest } from "../interfaces/interface";
+import logger from "../lib/logger";
 
 const generateDocService = new GenerateDocService();
 const userService = new UserService();
@@ -12,9 +13,21 @@ export class GenerateDocController {
     const { result } = req.query;
     const userId = userService.checkCurrentUser(req);
 
+    logger.info(
+      `(GET RESULT) - User ID: ${userId}, Job Data ID: ${jobDataId} Attempting to get ${result}`
+    );
+
     const userData = await userService.getUserJobData(userId, jobDataId);
 
+    logger.info(
+      `(GET RESULT) - User ID: ${userId}, Job Data ID: ${jobDataId} Fetched user data`
+    );
+
     const existingResult = await generateDocService.generate(userData);
+
+    logger.info(
+      `(GET RESULT) - User ID: ${userId}, Job Data ID: ${jobDataId} Generated document`
+    );
 
     switch (result) {
       case "cv":
