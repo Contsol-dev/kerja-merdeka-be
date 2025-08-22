@@ -10,7 +10,7 @@ export async function discoverModels() {
     return models;
   } catch (error) {
     logger.error("Error discovering models:", error);
-    throw new ApiError(500, "Internal Server Error");
+    throw error;
   }
 }
 
@@ -26,7 +26,7 @@ export async function generateText(prompt: string): Promise<string> {
     return resp.choices?.[0].message?.content || "No output";
   } catch (error) {
     logger.error("Error generating text:", error);
-    throw new ApiError(500, "Internal Server Error");
+    throw error;
   }
 }
 
@@ -81,7 +81,7 @@ export async function generateDocs(user: UserData) {
     return JSON.parse(text ?? "{}");
   } catch (error) {
     logger.error("Error generating documents:", error);
-    throw new ApiError(500, "Internal Server Error");
+    throw error;
   }
 }
 
@@ -99,6 +99,6 @@ export async function createCompletionJson(
     return JSON.parse(text ?? "{}");
   } catch (error) {
     logger.error("Error creating completion JSON:", error);
-    throw new ApiError(500, "Internal Server Error");
+    throw error;
   }
 }

@@ -69,7 +69,7 @@ export class SendJobpackService {
       return resp;
     } catch (error: any) {
       logger.error("Failed to send jobpack: " + error.message);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 }

@@ -13,6 +13,6 @@ export async function chatCompletion(messages: ChatCompletionMessageParam[]) {
     return completion.choices[0].message.content || "No output";
   } catch (error: any) {
     logger.error("Failed to generate chat completion: " + error.message);
-    throw new ApiError(500, "Internal Server Error");
+    throw error;
   }
 }

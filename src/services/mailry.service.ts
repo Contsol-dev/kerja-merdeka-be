@@ -31,7 +31,7 @@ export async function handleAttachment(
     return resp.data.data.id;
   } catch (error) {
     logger.error(`Attachment upload failed: ${error}`);
-    throw new ApiError(500, "Internal Server Error");
+    throw error;
   }
 }
 
@@ -61,6 +61,6 @@ export async function sendMail(
     return resp.data;
   } catch (error) {
     logger.error(`Mailry API failed: ${error}`);
-    throw new ApiError(500, "Internal Server Error");
+    throw error;
   }
 }
