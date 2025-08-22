@@ -7,100 +7,107 @@ import {
   InsertCvPersonalReq,
   InsertCvSkillReq,
 } from "../interfaces/dto.interface";
+import logger from "../lib/logger";
 
 const userService = new UserService();
 
 export class UserController {
   static async getUserData(req: AuthRequest, res: Response) {
-    try {
-      const userId = userService.checkCurrentUser(req);
+    const userId = userService.checkCurrentUser(req);
 
-      const userData = await userService.getUserData(userId);
-      return res.status(200).json({
-        success: true,
-        data: userData,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Internal Server Error",
-      });
-    }
+    logger.info(
+      `(GET USER DATA) - User ID: ${userId} Attempting to retrieve user data`
+    );
+
+    const userData = await userService.getUserData(userId);
+
+    logger.info(
+      `(GET USER DATA) - User ID: ${userId} Successfully retrieved user data`
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: userData,
+    });
   }
 
   static async insertCvPersonal(req: AuthRequest, res: Response) {
-    try {
-      const userId = userService.checkCurrentUser(req);
+    const userId = userService.checkCurrentUser(req);
 
-      const data: InsertCvPersonalReq = req.body;
-      const updatedUser = await userService.insertCvPersonal(userId, data);
+    logger.info(
+      `(INSERT CV PERSONAL) - User ID: ${userId} Attempting to insert personal information`
+    );
 
-      return res.status(200).json({
-        success: true,
-        data: updatedUser,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: "Bad Request",
-      });
-    }
+    const data: InsertCvPersonalReq = req.body;
+    const updatedUser = await userService.insertCvPersonal(userId, data);
+
+    logger.info(
+      `(INSERT CV PERSONAL) - User ID: ${userId} Successfully inserted personal information`
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: updatedUser,
+    });
   }
 
   static async insertCvExperience(req: AuthRequest, res: Response) {
-    try {
-      const userId = userService.checkCurrentUser(req);
+    const userId = userService.checkCurrentUser(req);
 
-      const data: InsertCvExperienceReq[] = req.body;
-      const experiences = await userService.insertCvExperience(userId, data);
+    logger.info(
+      `(INSERT CV EXPERIENCE) - User ID: ${userId} Attempting to insert experience information`
+    );
 
-      return res.status(201).json({
-        success: true,
-        data: experiences,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: "Bad Request",
-      });
-    }
+    const data: InsertCvExperienceReq[] = req.body;
+    const experiences = await userService.insertCvExperience(userId, data);
+
+    logger.info(
+      `(INSERT CV EXPERIENCE) - User ID: ${userId} Successfully inserted experience information`
+    );
+
+    return res.status(201).json({
+      success: true,
+      data: experiences,
+    });
   }
 
   static async insertCvEducation(req: AuthRequest, res: Response) {
-    try {
-      const userId = userService.checkCurrentUser(req);
+    const userId = userService.checkCurrentUser(req);
 
-      const data: InsertCvEducationReq[] = req.body;
-      const educations = await userService.insertCvEducation(userId, data);
+    logger.info(
+      `(INSERT CV EDUCATION) - User ID: ${userId} Attempting to insert education information`
+    );
 
-      return res.status(201).json({
-        success: true,
-        data: educations,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: "Bad Request",
-      });
-    }
+    const data: InsertCvEducationReq[] = req.body;
+    const educations = await userService.insertCvEducation(userId, data);
+
+    logger.info(
+      `(INSERT CV EDUCATION) - User ID: ${userId} Successfully inserted education information`
+    );
+
+    return res.status(201).json({
+      success: true,
+      data: educations,
+    });
   }
 
   static async insertCvSkill(req: AuthRequest, res: Response) {
-    try {
-      const userId = userService.checkCurrentUser(req);
+    const userId = userService.checkCurrentUser(req);
 
-      const data: InsertCvSkillReq[] = req.body;
-      const skills = await userService.insertCvSkill(userId, data);
+    logger.info(
+      `(INSERT CV SKILL) - User ID: ${userId} Attempting to insert skill information`
+    );
 
-      return res.status(201).json({
-        success: true,
-        data: skills,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: "Bad Request",
-      });
-    }
+    const data: InsertCvSkillReq[] = req.body;
+    const skills = await userService.insertCvSkill(userId, data);
+
+    logger.info(
+      `(INSERT CV SKILL) - User ID: ${userId} Successfully inserted skill information`
+    );
+
+    return res.status(201).json({
+      success: true,
+      data: skills,
+    });
   }
 }

@@ -30,7 +30,6 @@ model User {
   educations  Education[]
   experiences Experience[]
   skills      Skill[]
-  logs        Log[]
 }
 
 model Education {
@@ -113,14 +112,6 @@ model GeneratedResult {
   createdAt   DateTime @default(now())
   jobDataId   String   @unique
   job         JobData  @relation(fields: [jobDataId], references: [id])
-}
-
-model Log {
-  id        String   @id @default(cuid())
-  action    String
-  createdAt DateTime @default(now())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model InterviewLog {

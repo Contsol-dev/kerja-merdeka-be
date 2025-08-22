@@ -1,33 +1,30 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { SendJobpackService } from "../services/send-jobpack.service";
 import { AuthRequest } from "../interfaces/interface";
+import { UserService } from "../services/user.service";
+import logger from "../lib/logger";
 
 const sendJobpackService = new SendJobpackService();
+const userService = new UserService();
 
 export class SendJobpackController {
   static async sendJobpack(req: AuthRequest, res: Response) {
-    try {
-      console.log("Received request to send jobpack...");
+    const { jobDataId } = req.params;
+    const userId = userService.checkCurrentUser(req);
 
-      const { jobDataId } = req.params;
-      const userId = req.user?.userId;
-      if (!userId) {
-        return res.status(401).json({
-          success: false,
-          message: "Unauthorized: User ID not found",
-        });
-      }
+    logger.info(
+      `(SEND JOBPACK) - User ID: ${userId}, Job Data ID: ${jobDataId} Attempting to send jobpack`
+    );
 
-      const response = await sendJobpackService.sendJobpack(userId, jobDataId);
-      res.status(200).json({
-        success: true,
-        data: response,
-      });
-    } catch (error: any) {
-      res.status(400).json({
-        success: false,
-        message: error.message,
-      });
-    }
+    const response = await sendJobpackService.sendJobpack(userId, jobDataId);
+
+    logger.info(
+      `(SEND JOBPACK) - User ID: ${userId}, Job Data ID: ${jobDataId} Successfully sent jobpack`
+    );
+
+    res.status(200).json({
+      success: true,
+      data: response,
+    });
   }
 }
