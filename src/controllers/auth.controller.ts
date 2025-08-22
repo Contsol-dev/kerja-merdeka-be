@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { AuthService } from "../services/auth.service";
+import { UnauthorizedError } from "../errors/auth.error";
 
 const authService = new AuthService();
 
@@ -28,7 +29,9 @@ export class AuthController {
       const { token, user } = await authService.login(email, password);
       res.status(200).json({ success: true, token, user });
     } catch (err: any) {
-      res.status(400).json({ success: false, message: err.message });
+      res
+        .status(err instanceof UnauthorizedError ? 401 : 400)
+        .json({ success: false, message: err.message });
     }
   }
 }

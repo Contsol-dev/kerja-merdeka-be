@@ -27,7 +27,7 @@ async function main() {
       name: "Iqbal Ghozy",
       phone: "+628123456789",
       linkedin: "https://linkedin.com/in/iqbalghozy",
-      github: "https://github.com/iqbalghozy",
+      portfolio: "https://github.com/iqbalghozy",
     },
   });
 

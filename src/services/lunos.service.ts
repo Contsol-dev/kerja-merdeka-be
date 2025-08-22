@@ -29,7 +29,7 @@ export async function generateDocs(user: UserData) {
   Phone: ${user.phone}
   Address: ${user.address}
   LinkedIn: ${user.linkedin}
-  GitHub: ${user.github}
+  GitHub: ${user.portfolio}
   Education: ${user.educations
     .map(
       (edu) =>

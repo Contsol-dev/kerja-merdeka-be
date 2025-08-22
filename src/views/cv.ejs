@@ -147,7 +147,9 @@
       <div class="name"><%= user.name %></div>
       <div class="title"><%= user.address %></div>
       <div class="contact-info">
-        <span class="contact-item"><strong>Phone:</strong> <%= user.phone %></span>
+        <span class="contact-item"
+          ><strong>Phone:</strong> <%= user.phone %></span
+        >
         <span class="contact-item">
           <strong>Email:</strong>
           <a href="mailto:<%= user.email %>"><%= user.email %></a>
@@ -155,19 +157,32 @@
         <% if (user.linkedin) { %>
         <span class="contact-item">
           <strong>LinkedIn:</strong>
-          <a href="<%= user.linkedin %>" target="_blank" rel="noopener noreferrer">Profile</a>
+          <a
+            href="<%= user.linkedin %>"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Profile</a
+          >
         </span>
-        <% } %>
-        <% if (user.github) { %>
+        <% } %> <% if (user.portfolio) { %>
         <span class="contact-item">
           <strong>GitHub:</strong>
-          <a href="<%= user.github %>" target="_blank" rel="noopener noreferrer">Profile</a>
+          <a
+            href="<%= user.portfolio %>"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Profile</a
+          >
         </span>
-        <% } %>
-        <% if (user.portfolio) { %>
+        <% } %> <% if (user.portfolio) { %>
         <span class="contact-item">
           <strong>Portfolio:</strong>
-          <a href="<%= user.portfolio %>" target="_blank" rel="noopener noreferrer">Website</a>
+          <a
+            href="<%= user.portfolio %>"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Website</a
+          >
         </span>
         <% } %>
       </div>
@@ -184,7 +199,10 @@
       <div class="education-item">
         <div class="degree"><%= edu.degree %> in <%= edu.fieldOfStudy %></div>
         <div class="institution">
-          <%= edu.institution %> | <%= edu.startDate.toLocaleString('default', { month: 'short', year: 'numeric' }) %> - <%= edu.endDate.toLocaleString('default', { month: 'short', year: 'numeric' }) %>
+          <%= edu.institution %> | <%= edu.startDate.toLocaleString('default', {
+          month: 'short', year: 'numeric' }) %> - <%=
+          edu.endDate.toLocaleString('default', { month: 'short', year:
+          'numeric' }) %>
         </div>
       </div>
       <% }) %>
@@ -196,7 +214,10 @@
       <div class="job">
         <div class="job-title"><%= exp.title %></div>
         <div class="company-info">
-          <%= exp.company %> | <%= exp.location %> | <%= exp.startDate.toLocaleString('default', { month: 'short', year: 'numeric' }) %> - <%= exp.endDate.toLocaleString('default', { month: 'short', year: 'numeric' }) %>
+          <%= exp.company %> | <%= exp.location %> | <%=
+          exp.startDate.toLocaleString('default', { month: 'short', year:
+          'numeric' }) %> - <%= exp.endDate.toLocaleString('default', { month:
+          'short', year: 'numeric' }) %>
         </div>
         <div class="job-description">
           <p><%= exp.description %></p>
@@ -215,7 +236,10 @@
     </section>
 
     <footer>
-      <p>&copy; <%= new Date().getFullYear() %> <%= user.name %>. All rights reserved.</p>
+      <p>
+        &copy; <%= new Date().getFullYear() %> <%= user.name %>. All rights
+        reserved.
+      </p>
     </footer>
   </body>
 </html>
