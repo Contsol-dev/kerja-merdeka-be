@@ -1,15 +1,23 @@
 import { Request, Response } from "express";
 import { UserService } from "../services/user.service";
 import { GenerateDocService } from "../services/generate-doc.service";
+import { AuthRequest } from "../interfaces/interface";
 
 const generateDocService = new GenerateDocService();
 const userService = new UserService();
 
 export class GenerateDocController {
-  static async getResult(req: Request, res: Response) {
+  static async getResult(req: AuthRequest, res: Response) {
     try {
-      const { userId, jobDataId } = req.params;
+      const { jobDataId } = req.params;
       const { result } = req.query;
+      const userId = req.user?.userId;
+      if (!userId) {
+        return res.status(401).json({
+          success: false,
+          message: "Unauthorized: User ID not found",
+        });
+      }
 
       const userData = await userService.getUserJobData(userId, jobDataId);
 
