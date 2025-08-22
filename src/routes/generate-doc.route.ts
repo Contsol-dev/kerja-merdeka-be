@@ -3,6 +3,6 @@ import { GenerateDocController } from "../controllers/generate-doc.controller";
 
 const router = Router();
 
-router.get("/:userId/:jobDataId", GenerateDocController.getResult);
+router.get("/:jobDataId", GenerateDocController.getResult);
 
 export default router;

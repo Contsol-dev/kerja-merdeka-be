@@ -13,6 +13,20 @@ export class MockInterviewService {
     this.userService = new UserService();
   }
 
+  async userJobCheck(userId: string, jobDataId: string) {
+    if (!userId || !jobDataId) {
+      throw new Error("User ID and Job Data ID are required");
+    }
+
+    const job = await prisma.jobData.findUnique({
+      where: { id: jobDataId, userId },
+    });
+
+    if (!job) throw new Error("Job data not found for the user");
+
+    return;
+  }
+
   formatuserJobContext(userData: UserData): string {
     const experiences = userData.experiences
       .map(

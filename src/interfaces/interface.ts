@@ -1,4 +1,5 @@
 import { ExperienceStatus, ExperienceType, SkillLevel } from "@prisma/client";
+import { Request } from "express";
 
 export interface UserData {
   id: string;
@@ -78,4 +79,8 @@ export interface SendMailPayload {
   plainBody?: string;
   cc?: string | string[];
   attachments?: string[];
+}
+
+export interface AuthRequest extends Request {
+  user?: { userId: string };
 }
