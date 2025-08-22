@@ -1,3 +1,6 @@
+### CConnection Test
+GET http://localhost:4000/api/
+
 ### Lunos - Discover Models
 GET http://localhost:4000/api/lunos/discover-models
 
@@ -39,3 +42,6 @@ GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7
 
 ### Get Summary (Replace with actual ID)
 GET http://localhost:4000/api/doc/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv?result=summary
+
+### Send Jobpack (Replace with actual ID)
+GET http://localhost:4000/api/jobpack/cmek3xp7c0000tgn0450wdynu/cmek3xp8o000atgn03g7yqebv
