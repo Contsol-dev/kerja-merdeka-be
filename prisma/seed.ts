@@ -15,7 +15,6 @@ async function main() {
   await prisma.skill.deleteMany();
   await prisma.experience.deleteMany();
   await prisma.education.deleteMany();
-  await prisma.log.deleteMany();
   await prisma.user.deleteMany();
 
   const hashedPassword = await bcrypt.hash("kerjamerdeka123", 10);

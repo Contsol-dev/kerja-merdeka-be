@@ -200,9 +200,9 @@
         <div class="degree"><%= edu.degree %> in <%= edu.fieldOfStudy %></div>
         <div class="institution">
           <%= edu.institution %> | <%= edu.startDate.toLocaleString('default', {
-          month: 'short', year: 'numeric' }) %> - <%=
+          month: 'short', year: 'numeric' }) %> - <%= edu.endDate ?
           edu.endDate.toLocaleString('default', { month: 'short', year:
-          'numeric' }) %>
+          'numeric' }) : 'Present' %>
         </div>
       </div>
       <% }) %>
@@ -216,8 +216,9 @@
         <div class="company-info">
           <%= exp.company %> | <%= exp.location %> | <%=
           exp.startDate.toLocaleString('default', { month: 'short', year:
-          'numeric' }) %> - <%= exp.endDate.toLocaleString('default', { month:
-          'short', year: 'numeric' }) %>
+          'numeric' }) %> - <%= exp.endDate ?
+          exp.endDate.toLocaleString('default', { month: 'short', year:
+          'numeric' }) : 'Present' %>
         </div>
         <div class="job-description">
           <p><%= exp.description %></p>
