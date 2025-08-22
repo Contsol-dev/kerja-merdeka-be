@@ -4,6 +4,8 @@ import { GenerateDocService } from "./generate-doc.service";
 import { handleAttachment, sendMail } from "./mailry.service";
 import { UserService } from "./user.service";
 import { toPlainText } from "../utils/utils";
+import { ApiError } from "../middlewares/error-handler.middleware";
+import logger from "../lib/logger";
 
 const userService = new UserService();
 const generateDocService = new GenerateDocService();
@@ -18,7 +20,7 @@ export class SendJobpackService {
 
       const result = userData.jobs[0].results;
 
-      if (!result) throw new Error("No results found");
+      if (!result) throw new ApiError(404, "No results found");
 
       const cvBuffer = await generateDocService.renderCvBuffer(
         userData,
@@ -39,8 +41,6 @@ export class SendJobpackService {
         coverLetterBuffer
       );
 
-      console.log("Rendering email body...");
-
       const htmlBody = await ejs.renderFile(
         path.join(__dirname, "..", "views", "email", "jobpack.ejs"),
         {
@@ -58,8 +58,6 @@ export class SendJobpackService {
       );
       const plainBody = toPlainText(htmlBody);
 
-      console.log("Sending email...");
-
       const resp = await sendMail({
         to: userData.email,
         subject: `Job Application - ${userData.jobs[0].jobTitle} - ${userData.name}`,
@@ -70,7 +68,8 @@ export class SendJobpackService {
 
       return resp;
     } catch (error: any) {
-      throw new Error(`Failed to send jobpack: ${error.message}`);
+      logger.error("Failed to send jobpack: " + error.message);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 }

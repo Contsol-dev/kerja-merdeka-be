@@ -2,14 +2,14 @@ import axios from "axios";
 import env from "../configs/env.config";
 import FormData from "form-data";
 import { SendMailPayload } from "../interfaces/interface";
+import logger from "../lib/logger";
+import { ApiError } from "../middlewares/error-handler.middleware";
 
 export async function handleAttachment(
   filename: string,
   buffer: Buffer | Uint8Array | ArrayBuffer
 ) {
   try {
-    console.log(`Uploading attachment: ${filename}`);
-
     const safeBuffer = Buffer.isBuffer(buffer)
       ? buffer
       : Buffer.from(buffer as any);
@@ -28,11 +28,10 @@ export async function handleAttachment(
       }
     );
 
-    console.log(`Attachment uploaded:\n`, resp);
-
     return resp.data.data.id;
   } catch (error) {
-    throw new Error(`Failed to upload attachment: ${error}`);
+    logger.error(`Attachment upload failed: ${error}`);
+    throw new ApiError(500, "Internal Server Error");
   }
 }
 
@@ -61,6 +60,7 @@ export async function sendMail(
 
     return resp.data;
   } catch (error) {
-    throw new Error(`Mailry API failed: ${error}`);
+    logger.error(`Mailry API failed: ${error}`);
+    throw new ApiError(500, "Internal Server Error");
   }
 }
