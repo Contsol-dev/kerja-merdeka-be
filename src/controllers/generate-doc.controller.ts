@@ -28,15 +28,19 @@ export class GenerateDocController {
           );
           break;
 
-        default:
-          break;
-
         case "summary":
           res.status(200).json({
             success: true,
             data: {
               summary: existingResult?.summary,
             },
+          });
+          break;
+
+        default:
+          res.status(400).json({
+            success: false,
+            message: "Invalid result type",
           });
           break;
       }

@@ -20,6 +20,8 @@ export class UserService {
   }
 
   async getUserGeneratedData(userId: string, jobDataId: string) {
+    console.log("Fetching user generated data...");
+
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: {
@@ -40,6 +42,8 @@ export class UserService {
       throw new Error("Job data not found for the user");
     if (user.jobs[0].results === null)
       throw new Error("User generated data not found");
+
+    console.log("User generated data fetched successfully");
 
     return user;
   }
