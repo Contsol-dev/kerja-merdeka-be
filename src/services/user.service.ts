@@ -5,12 +5,14 @@ import {
   InsertCvSkillReq,
 } from "../interfaces/dto.interface";
 import { AuthRequest } from "../interfaces/interface";
+import logger from "../lib/logger";
 import prisma from "../lib/prisma";
+import { ApiError } from "../middlewares/error-handler.middleware";
 
 export class UserService {
   checkCurrentUser(req: AuthRequest) {
     const userId = req.user?.userId;
-    if (!userId) throw new Error("Unauthorized: User ID not found");
+    if (!userId) throw new ApiError(401, "Unauthorized: User ID not found");
 
     return userId;
   }
@@ -33,7 +35,8 @@ export class UserService {
         portfolio: user.portfolio,
       };
     } catch (error: any) {
-      throw new Error(error.message);
+      logger.error(`Error inserting CV personal data: ${error.message}`);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 
@@ -48,7 +51,8 @@ export class UserService {
 
       return experiences;
     } catch (error: any) {
-      throw new Error(error.message);
+      logger.error(`Error inserting CV experience data: ${error.message}`);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 
@@ -63,7 +67,8 @@ export class UserService {
 
       return educations;
     } catch (error: any) {
-      throw new Error(error.message);
+      logger.error(`Error inserting CV education data: ${error.message}`);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 
@@ -78,7 +83,8 @@ export class UserService {
 
       return skills;
     } catch (error: any) {
-      throw new Error(error.message);
+      logger.error(`Error inserting CV skill data: ${error.message}`);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 
@@ -93,11 +99,12 @@ export class UserService {
         },
       });
 
-      if (!user) throw new Error("User not found");
+      if (!user) throw new ApiError(404, "User not found");
 
       return user;
     } catch (error: any) {
-      throw new Error(`Error fetching user data: ${error.message}`);
+      logger.error(`Error fetching user data: ${error.message}`);
+      throw new ApiError(500, `Error fetching user data: ${error.message}`);
     }
   }
 
@@ -115,17 +122,16 @@ export class UserService {
         },
       });
 
-      if (!user) throw new Error("User not found");
+      if (!user) throw new ApiError(404, "User not found");
 
       return user;
     } catch (error: any) {
-      throw new Error(`Error fetching user job data: ${error.message}`);
+      logger.error(`Error fetching user job data: ${error.message}`);
+      throw new ApiError(500, `Error fetching user job data: ${error.message}`);
     }
   }
 
   async getUserGeneratedData(userId: string, jobDataId: string) {
-    console.log("Fetching user generated data...");
-
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: {
@@ -141,13 +147,11 @@ export class UserService {
       },
     });
 
-    if (!user) throw new Error("User not found");
+    if (!user) throw new ApiError(404, "User not found");
     if (user.jobs.length === 0)
-      throw new Error("Job data not found for the user");
+      throw new ApiError(404, "Job data not found for the user");
     if (user.jobs[0].results === null)
-      throw new Error("User generated data not found");
-
-    console.log("User generated data fetched successfully");
+      throw new ApiError(404, "User generated data not found");
 
     return user;
   }

@@ -5,6 +5,8 @@ import { chatCompletion } from "./unli.service";
 import prisma from "../lib/prisma";
 import { createCompletionJson } from "./lunos.service";
 import { ChatMessage } from "@lunos/client";
+import { ApiError } from "../middlewares/error-handler.middleware";
+import logger from "../lib/logger";
 
 export class MockInterviewService {
   private userService: UserService;
@@ -14,15 +16,14 @@ export class MockInterviewService {
   }
 
   async userJobCheck(userId: string, jobDataId: string) {
-    if (!userId || !jobDataId) {
-      throw new Error("User ID and Job Data ID are required");
-    }
+    if (!userId || !jobDataId)
+      throw new ApiError(400, "User ID and Job Data ID are required");
 
     const job = await prisma.jobData.findUnique({
       where: { id: jobDataId, userId },
     });
 
-    if (!job) throw new Error("Job data not found for the user");
+    if (!job) throw new ApiError(404, "Job data not found for the user");
 
     return;
   }
@@ -73,7 +74,7 @@ export class MockInterviewService {
     try {
       const user = await this.userService.getUserJobData(userId, jobDataId);
 
-      if (!user.jobs.length) throw new Error("Job data not found");
+      if (!user.jobs.length) throw new ApiError(404, "Job data not found");
 
       const systemPrompt = `
     You are an interviewer for the role of ${user.jobs[0].jobTitle}.
@@ -115,7 +116,8 @@ export class MockInterviewService {
 
       return { question: newLog.question };
     } catch (error: any) {
-      throw new Error("Failed to start interview: " + error.message);
+      logger.error("Failed to start interview: " + error.message);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 
@@ -126,14 +128,14 @@ export class MockInterviewService {
         select: { context: true },
       });
 
-      if (!interviewInfo) throw new Error("User job context not found");
+      if (!interviewInfo) throw new ApiError(404, "User job context not found");
 
       const lastLog = await prisma.interviewLog.findFirst({
         where: { jobDataId: jobDataId, answer: null },
         orderBy: { createdAt: "desc" },
       });
 
-      if (!lastLog) throw new Error("No unanswered questions found");
+      if (!lastLog) throw new ApiError(404, "No unanswered questions found");
 
       await prisma.interviewLog.update({
         where: { id: lastLog.id },
@@ -165,7 +167,8 @@ export class MockInterviewService {
 
       return { question: newLog.question };
     } catch (error: any) {
-      throw new Error("Failed to answer question: " + error.message);
+      logger.error("Failed to answer question: " + error.message);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 
@@ -178,7 +181,8 @@ export class MockInterviewService {
 
       return logs;
     } catch (error: any) {
-      throw new Error("Failed to get interview logs: " + error.message);
+      logger.error("Failed to get interview logs: " + error.message);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 
@@ -197,7 +201,7 @@ export class MockInterviewService {
 
       const logs = await this.getInterviewLogs(jobDataId);
 
-      if (!logs.length) throw new Error("No interview logs found");
+      if (!logs.length) throw new ApiError(404, "No interview logs found");
 
       const qaPairs = logs
         .map((log) => `Q: ${log.question}\nA: ${log.answer || "No answer yet"}`)
@@ -233,7 +237,8 @@ export class MockInterviewService {
         score: updatedInterviewInfo.score,
       };
     } catch (error: any) {
-      throw new Error("Failed to get interview feedback: " + error.message);
+      logger.error("Failed to get interview feedback: " + error.message);
+      throw new ApiError(500, "Internal Server Error");
     }
   }
 }
