@@ -4,6 +4,7 @@ import {
   ExperienceStatus,
   SkillLevel,
 } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -17,13 +18,16 @@ async function main() {
   await prisma.log.deleteMany();
   await prisma.user.deleteMany();
 
+  const hashedPassword = await bcrypt.hash("kerjamerdeka123", 10);
+
   const user = await prisma.user.create({
     data: {
       email: "iqbal@example.com",
+      password: hashedPassword,
       name: "Iqbal Ghozy",
       phone: "+628123456789",
       linkedin: "https://linkedin.com/in/iqbalghozy",
-      github: "https://github.com/iqbalghozy",
+      portfolio: "https://github.com/iqbalghozy",
     },
   });
 
