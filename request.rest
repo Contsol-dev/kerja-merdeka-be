@@ -70,3 +70,101 @@ Content-Type: application/json
   "email": "iqbal@example.com",
   "password": "kerjamerdeka123"
 }
+
+### Insert Personal Data
+POST http://localhost:4000/api/user/personal
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "phone": "1234567890",
+  "name": "Test User",
+  "address": null,
+  "linkedin": null,
+  "portfolio": null
+}
+
+### Insert Experiences Data
+POST http://localhost:4000/api/user/experience
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Content-Type: application/json
+
+[
+  {
+    "jobTitle": "Software Engineer",
+    "company": "Tech Company",
+    "location": "Remote",
+    "startDate": "2023-12-31T00:00:00.000Z",
+    "endDate": "2024-12-31T00:00:00.000Z",
+    "description": "Developed web applications"
+  },
+  {
+    "jobTitle": "Senior Software Engineer",
+    "company": "Another Tech Company",
+    "location": null,
+    "startDate": "2021-02-01T00:00:00.000Z",
+    "endDate": null,
+    "description": null
+  }
+]
+
+### Insert Educations Data
+POST http://localhost:4000/api/user/education
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Content-Type: application/json
+
+[
+  {
+    "degree": "Bachelor's Degree",
+    "fieldOfStudy": "Computer Science",
+    "institution": "Tech University",
+    "startDate": "2018-01-01T00:00:00.000Z",
+    "endDate": "2022-01-01T00:00:00.000Z"
+  },
+  {
+    "degree": "Master's Degree",
+    "fieldOfStudy": "Software Engineering",
+    "institution": "Another Tech University",
+    "startDate": "2022-02-01T00:00:00.000Z",
+    "endDate": null
+  }
+]
+
+### Insert Skills Data
+POST http://localhost:4000/api/user/skills
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Content-Type: application/json
+
+[
+  {
+    "skill": "JavaScript",
+    "level": "BEGINNER"
+  },
+  {
+    "skill": "TypeScript",
+    "level": "BEGINNER"
+  }
+]
+
+### Get User Data
+GET http://localhost:4000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+
+### Insert Job Data
+POST http://localhost:4000/api/job
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Content-Type: application/json
+
+{
+  "jobTitle": "Software Engineer",
+  "company": "Tech Company",
+  "location": "Remote",
+  "startDate": "2023-12-31T00:00:00.000Z",
+  "endDate": "2024-12-31T00:00:00.000Z",
+  "description": "Developed web applications"
+}
+
+### Get Job List
+GET http://localhost:4000/api/job
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
