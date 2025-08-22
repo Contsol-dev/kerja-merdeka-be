@@ -1,10 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import env from "../configs/env.config";
-
-export interface AuthRequest extends Request {
-  user?: { userId: string };
-}
+import { AuthRequest } from "../interfaces/interface";
 
 export function authMiddleware(
   req: AuthRequest,
