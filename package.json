@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --runInBand --detectOpenHandles",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json",
+    "build:scripts": "tsc -p tsconfig.scripts.json",
     "start": "node dist/server.js"
   },
   "keywords": [],
