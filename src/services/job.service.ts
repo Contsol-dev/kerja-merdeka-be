@@ -16,7 +16,7 @@ export class JobService {
       return job;
     } catch (error: any) {
       logger.error(`Error inserting job data: ${error.message}`);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 
@@ -29,7 +29,7 @@ export class JobService {
       return jobList;
     } catch (error: any) {
       logger.error(`Error fetching job list: ${error.message}`);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 }
