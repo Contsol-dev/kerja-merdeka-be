@@ -6,10 +6,12 @@ import path from "path";
 import prisma from "../lib/prisma";
 import { generateDocs } from "./lunos.service";
 import { makeCacheKey, pdfCache } from "../lib/pdfCache";
+import { ApiError } from "../middlewares/error-handler.middleware";
+import logger from "../lib/logger";
 export class GenerateDocService {
   async generate(userData: UserData) {
     try {
-      if (!userData.jobs.length) throw new Error("Job data not found");
+      if (!userData.jobs.length) throw new ApiError(400, "Job data not found");
 
       const jobDataId = userData.jobs[0].id;
 
@@ -34,14 +36,13 @@ export class GenerateDocService {
 
       return result;
     } catch (error: any) {
-      throw new Error("Failed to generate document: " + error.message);
+      logger.error(`Document generation error: ${error.message}`);
+      throw error;
     }
   }
 
   async renderCvBuffer(userData: UserData, summary: string | null) {
     try {
-      console.log("Rendering CV buffer...");
-
       const html = await ejs.renderFile(
         path.join(__dirname, "..", "views", "cv.ejs"),
         { user: userData, summary }
@@ -53,11 +54,10 @@ export class GenerateDocService {
       const pdfBuffer = await page.pdf({ format: "A4" });
       await browser.close();
 
-      console.log("CV buffer rendered successfully");
-
       return pdfBuffer;
     } catch (error: any) {
-      throw new Error("Failed to render CV buffer: " + error.message);
+      logger.error(`CV buffer rendering error: ${error.message}`);
+      throw error;
     }
   }
 
@@ -87,8 +87,8 @@ export class GenerateDocService {
       );
       res.send(pdf);
     } catch (error) {
-      console.error("Error generating CV:", error);
-      res.status(500).send("Failed to generate CV.");
+      logger.error("Error generating CV:", error);
+      throw error;
     }
   }
 
@@ -97,8 +97,6 @@ export class GenerateDocService {
     coverLetter: string | null
   ) {
     try {
-      console.log("Rendering Cover Letter buffer...");
-
       const html = await ejs.renderFile(
         path.join(__dirname, "..", "views", "cover-letter.ejs"),
         {
@@ -114,11 +112,10 @@ export class GenerateDocService {
       const pdfBuffer = await page.pdf({ format: "A4" });
       await browser.close();
 
-      console.log("Cover Letter buffer rendered successfully");
-
       return pdfBuffer;
     } catch (error: any) {
-      throw new Error("Failed to render cover letter buffer: " + error.message);
+      logger.error(`Cover Letter buffer rendering error: ${error.message}`);
+      throw error;
     }
   }
 
@@ -156,8 +153,8 @@ export class GenerateDocService {
       );
       res.send(pdf);
     } catch (error) {
-      console.error("Error generating cover letter:", error);
-      res.status(500).json({ error: "Failed to generate cover letter" });
+      logger.error("Error generating cover letter:", error);
+      throw error;
     }
   }
 }
