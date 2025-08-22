@@ -214,7 +214,7 @@ export class MockInterviewService {
         You are an experienced HR interviewer. 
         You will evaluate the candidate's interview answers. 
         Provide:
-        1. A detailed feedback (strengths, weaknesses, suggestions).
+        1. A detailed feedback (strengths, weaknesses, suggestions) as string, not array.
         2. A score (0-100) based on the overall performance.
         Output in JSON format: { "feedback": "...", "score": number }
         `.trim(),
