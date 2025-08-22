@@ -13,13 +13,27 @@ export class MockInterviewService {
     this.userService = new UserService();
   }
 
+  async userJobCheck(userId: string, jobDataId: string) {
+    if (!userId || !jobDataId) {
+      throw new Error("User ID and Job Data ID are required");
+    }
+
+    const job = await prisma.jobData.findUnique({
+      where: { id: jobDataId, userId },
+    });
+
+    if (!job) throw new Error("Job data not found for the user");
+
+    return;
+  }
+
   formatuserJobContext(userData: UserData): string {
     const experiences = userData.experiences
       .map(
         (exp) =>
-          `- ${exp.title} at ${
-            exp.company
-          } (${exp.startDate.getFullYear()} - ${exp.endDate.getFullYear()})`
+          `- ${exp.title} at ${exp.company} (${exp.startDate.getFullYear()} - ${
+            exp.endDate?.getFullYear() || "Present"
+          })`
       )
       .join("\n");
 
@@ -28,7 +42,9 @@ export class MockInterviewService {
         (edu) =>
           `- ${edu.degree} in ${edu.fieldOfStudy} from ${
             edu.institution
-          } (${edu.startDate.getFullYear()} - ${edu.endDate.getFullYear()})`
+          } (${edu.startDate.getFullYear()} - ${
+            edu.endDate?.getFullYear() || "Present"
+          })`
       )
       .join("\n");
 

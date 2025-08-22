@@ -1,15 +1,45 @@
 import { ExperienceStatus, ExperienceType, SkillLevel } from "@prisma/client";
+import { Request } from "express";
 
-export interface UserData {
+export interface UserCoreData {
   id: string;
   email: string;
   name: string;
   phone: string | null;
   address: string | null;
   linkedin: string | null;
-  github: string | null;
+  portfolio: string | null;
   createdAt: Date;
   updatedAt: Date;
+  educations: {
+    id: string;
+    userId: string;
+    degree: string;
+    fieldOfStudy: string;
+    institution: string;
+    startDate: Date;
+    endDate: Date | null;
+  }[];
+  experiences: {
+    id: string;
+    type: ExperienceType;
+    userId: string;
+    company: string;
+    description: string | null;
+    startDate: Date;
+    endDate: Date | null;
+    status: ExperienceStatus;
+    title: string;
+  }[];
+  skills: {
+    id: string;
+    name: string;
+    userId: string;
+    level: SkillLevel;
+  }[];
+}
+
+export interface UserData extends UserCoreData {
   jobs: {
     id: string;
     createdAt: Date;
@@ -20,32 +50,6 @@ export interface UserData {
     description: string | null;
     location: string | null;
     deadline: Date | null;
-  }[];
-  educations: {
-    id: string;
-    userId: string;
-    degree: string;
-    fieldOfStudy: string;
-    institution: string;
-    startDate: Date;
-    endDate: Date;
-  }[];
-  experiences: {
-    id: string;
-    type: ExperienceType;
-    userId: string;
-    company: string;
-    description: string | null;
-    startDate: Date;
-    endDate: Date;
-    status: ExperienceStatus;
-    title: string;
-  }[];
-  skills: {
-    id: string;
-    name: string;
-    userId: string;
-    level: SkillLevel;
   }[];
 }
 
@@ -78,4 +82,8 @@ export interface SendMailPayload {
   plainBody?: string;
   cc?: string | string[];
   attachments?: string[];
+}
+
+export interface AuthRequest extends Request {
+  user?: { userId: string };
 }
