@@ -70,3 +70,12 @@ export interface UserGeneratedData extends UserData {
     } | null;
   }[];
 }
+
+export interface SendMailPayload {
+  to: string;
+  subject: string;
+  htmlBody?: string;
+  plainBody?: string;
+  cc?: string | string[];
+  attachments?: string[];
+}
