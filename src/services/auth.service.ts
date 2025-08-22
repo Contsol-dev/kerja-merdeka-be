@@ -35,7 +35,7 @@ export class AuthService {
       };
     } catch (error: any) {
       logger.error(`Login error: ${error.message}`);
-      throw new ApiError(500, "Internal server error");
+      throw error;
     }
   }
 
@@ -68,7 +68,7 @@ export class AuthService {
       };
     } catch (error: any) {
       logger.error(`Registration error: ${error.message}`);
-      throw new ApiError(500, "Internal server error");
+      throw error;
     }
   }
 

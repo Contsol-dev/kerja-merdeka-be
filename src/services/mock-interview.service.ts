@@ -117,7 +117,7 @@ export class MockInterviewService {
       return { question: newLog.question };
     } catch (error: any) {
       logger.error("Failed to start interview: " + error.message);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 
@@ -168,7 +168,7 @@ export class MockInterviewService {
       return { question: newLog.question };
     } catch (error: any) {
       logger.error("Failed to answer question: " + error.message);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 
@@ -182,7 +182,7 @@ export class MockInterviewService {
       return logs;
     } catch (error: any) {
       logger.error("Failed to get interview logs: " + error.message);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 
@@ -238,7 +238,7 @@ export class MockInterviewService {
       };
     } catch (error: any) {
       logger.error("Failed to get interview feedback: " + error.message);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 }

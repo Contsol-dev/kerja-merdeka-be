@@ -37,7 +37,7 @@ export class GenerateDocService {
       return result;
     } catch (error: any) {
       logger.error(`Document generation error: ${error.message}`);
-      throw new ApiError(500, "Internal server error");
+      throw error;
     }
   }
 
@@ -57,7 +57,7 @@ export class GenerateDocService {
       return pdfBuffer;
     } catch (error: any) {
       logger.error(`CV buffer rendering error: ${error.message}`);
-      throw new ApiError(500, "Internal server error");
+      throw error;
     }
   }
 
@@ -88,7 +88,7 @@ export class GenerateDocService {
       res.send(pdf);
     } catch (error) {
       logger.error("Error generating CV:", error);
-      throw new ApiError(500, "Internal server error");
+      throw error;
     }
   }
 
@@ -115,7 +115,7 @@ export class GenerateDocService {
       return pdfBuffer;
     } catch (error: any) {
       logger.error(`Cover Letter buffer rendering error: ${error.message}`);
-      throw new ApiError(500, "Internal server error");
+      throw error;
     }
   }
 
@@ -154,7 +154,7 @@ export class GenerateDocService {
       res.send(pdf);
     } catch (error) {
       logger.error("Error generating cover letter:", error);
-      throw new ApiError(500, "Internal server error");
+      throw error;
     }
   }
 }

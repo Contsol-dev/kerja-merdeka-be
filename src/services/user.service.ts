@@ -36,7 +36,7 @@ export class UserService {
       };
     } catch (error: any) {
       logger.error(`Error inserting CV personal data: ${error.message}`);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 
@@ -52,7 +52,7 @@ export class UserService {
       return experiences;
     } catch (error: any) {
       logger.error(`Error inserting CV experience data: ${error.message}`);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 
@@ -68,7 +68,7 @@ export class UserService {
       return educations;
     } catch (error: any) {
       logger.error(`Error inserting CV education data: ${error.message}`);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 
@@ -84,7 +84,7 @@ export class UserService {
       return skills;
     } catch (error: any) {
       logger.error(`Error inserting CV skill data: ${error.message}`);
-      throw new ApiError(500, "Internal Server Error");
+      throw error;
     }
   }
 
