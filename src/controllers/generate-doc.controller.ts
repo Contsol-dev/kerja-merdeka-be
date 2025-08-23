@@ -39,6 +39,8 @@ export class GenerateDocController {
         generateDocService.generateCv(
           userData,
           existingResult?.summary,
+          existingResult?.relevantExperience,
+          existingResult?.relevantSkills,
           res,
           isUpdate
         );

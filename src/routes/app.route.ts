@@ -16,6 +16,7 @@ router.get("/", (req, res) => {
   console.log("Received request for root endpoint");
   res.send("Welcome to the Job Application API");
 });
+router.use("/lunos", testLunosRouter);
 router.use("/lunos", authMiddleware, testLunosRouter);
 router.use("/mail", authMiddleware, testMailRouter);
 router.use("/doc", authMiddleware, generateDocRouter);
