@@ -63,71 +63,7 @@ export class GenerateDocService {
           user: userData,
           summary,
           experiences,
-          skills }
-      );
-
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage();
-      await page.setContent(html);
-      const pdfBuffer = await page.pdf({ format: "A4" });
-      await browser.close();
-
-      return pdfBuffer;
-    } catch (error: any) {
-      logger.error(`CV buffer rendering error: ${error.message}`);
-      throw error;
-    }
-  }
-
-  async generateCv(
-    userData: UserData,
-    summary: string | null,
-    res: Response,
-    update: boolean = false
-  ) {
-    try {
-      const cacheKey = makeCacheKey(userData.id, userData.jobs[0].id, "cv");
-
-      if (pdfCache.has(cacheKey) && !update) {
-        const pdf = pdfCache.get(cacheKey);
-        res.setHeader("Content-Type", "application/pdf");
-        res.setHeader(
-          "Content-Disposition",
-          `inline; filename=cv-${userData.id}.pdf`
-        );
-        return res.send(pdf);
-      } else {
-        pdfCache.delete(cacheKey);
-      }
-
-      const pdf = await this.renderCvBuffer(userData, summary);
-
-      pdfCache.set(cacheKey, pdf);
-      setTimeout(() => pdfCache.delete(cacheKey), 60 * 60 * 1000);
-
-      res.setHeader("Content-Type", "application/pdf");
-      res.setHeader(
-        "Content-Disposition",
-        `inline; filename=cv-${userData.id}.pdf`
-      );
-      res.send(pdf);
-    } catch (error) {
-      logger.error("Error generating CV:", error);
-      throw error;
-    }
-  }
-
-  async renderCoverLetterBuffer(
-    userData: UserData,
-    coverLetter: string | null
-  ) {
-    try {
-      const html = await ejs.renderFile(
-        path.join(__dirname, "..", "views", "cover-letter.ejs"),
-        {
-          name: userData.name,
-          coverLetter,
-          email: userData.email,
+          skills,
         }
       );
 
@@ -242,7 +178,7 @@ export class GenerateDocService {
       }
 
       const pdf = await this.renderCoverLetterBuffer(userData, coverLetter);
-      
+
       pdfCache.set(cacheKey, pdf);
       setTimeout(() => pdfCache.delete(cacheKey), 60 * 60 * 1000);
 
