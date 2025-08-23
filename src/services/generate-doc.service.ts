@@ -9,7 +9,7 @@ import { makeCacheKey, pdfCache } from "../lib/pdfCache";
 import { ApiError } from "../middlewares/error-handler.middleware";
 import logger from "../lib/logger";
 export class GenerateDocService {
-  async generate(userData: UserData) {
+  async generate(userData: UserData, update: boolean = false) {
     try {
       if (!userData.jobs.length) throw new ApiError(400, "Job data not found");
 
@@ -19,8 +19,12 @@ export class GenerateDocService {
         where: { jobDataId },
       });
 
-      if (existingResult) {
+      if (existingResult && !update) {
         return existingResult;
+      } else {
+        await prisma.generatedResult.deleteMany({
+          where: { jobDataId },
+        });
       }
 
       const { cvText, coverLetter, summary } = await generateDocs(userData);
@@ -61,11 +65,16 @@ export class GenerateDocService {
     }
   }
 
-  async generateCv(userData: UserData, summary: string | null, res: Response) {
+  async generateCv(
+    userData: UserData,
+    summary: string | null,
+    res: Response,
+    update: boolean = false
+  ) {
     try {
       const cacheKey = makeCacheKey(userData.id, userData.jobs[0].id, "cv");
 
-      if (pdfCache.has(cacheKey)) {
+      if (pdfCache.has(cacheKey) && !update) {
         const pdf = pdfCache.get(cacheKey);
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader(
@@ -73,6 +82,8 @@ export class GenerateDocService {
           `inline; filename=cv-${userData.id}.pdf`
         );
         return res.send(pdf);
+      } else {
+        pdfCache.delete(cacheKey);
       }
 
       const pdf = await this.renderCvBuffer(userData, summary);
@@ -122,7 +133,8 @@ export class GenerateDocService {
   async generateCoverLetter(
     userData: UserData,
     coverLetter: string | null,
-    res: Response
+    res: Response,
+    update: boolean = false
   ) {
     try {
       const cacheKey = makeCacheKey(
@@ -131,7 +143,7 @@ export class GenerateDocService {
         "coverLetter"
       );
 
-      if (pdfCache.has(cacheKey)) {
+      if (pdfCache.has(cacheKey) && !update) {
         const pdf = pdfCache.get(cacheKey);
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader(
@@ -139,6 +151,8 @@ export class GenerateDocService {
           `inline; filename=cover-letter-${userData.id}.pdf`
         );
         return res.send(pdf);
+      } else {
+        pdfCache.delete(cacheKey);
       }
 
       const pdf = await this.renderCoverLetterBuffer(userData, coverLetter);

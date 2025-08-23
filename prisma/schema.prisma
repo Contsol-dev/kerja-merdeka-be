@@ -111,7 +111,7 @@ model GeneratedResult {
   summary     String?
   createdAt   DateTime @default(now())
   jobDataId   String   @unique
-  job         JobData  @relation(fields: [jobDataId], references: [id])
+  job         JobData  @relation(fields: [jobDataId], references: [id], onDelete: Cascade)
 }
 
 model InterviewLog {
@@ -120,7 +120,7 @@ model InterviewLog {
   answer    String?
   createdAt DateTime @default(now())
   jobDataId String
-  job       JobData  @relation(fields: [jobDataId], references: [id])
+  job       JobData  @relation(fields: [jobDataId], references: [id], onDelete: Cascade)
 }
 
 model InterviewInfo {
