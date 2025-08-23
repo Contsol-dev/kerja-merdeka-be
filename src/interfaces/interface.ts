@@ -68,7 +68,8 @@ export interface UserGeneratedData extends UserData {
       jobDataId: string;
       id: string;
       createdAt: Date;
-      cvText: string;
+      relevantExperience: string;
+      relevantSkills: string;
       coverLetter: string;
       summary: string | null;
     } | null;

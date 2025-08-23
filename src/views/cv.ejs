@@ -210,7 +210,7 @@
 
     <section>
       <h2 class="section-title">Experience</h2>
-      <% user.experiences.forEach(exp => { %>
+      <% experiences.forEach(exp => { %>
       <div class="job">
         <div class="job-title"><%= exp.title %></div>
         <div class="company-info">
@@ -230,7 +230,7 @@
     <section>
       <h2 class="section-title">Skills</h2>
       <ul>
-        <% user.skills.forEach(skill => { %>
+        <% skills.forEach(skill => { %>
         <li><%= skill.name %></li>
         <% }) %>
       </ul>

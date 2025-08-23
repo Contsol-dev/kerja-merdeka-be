@@ -105,13 +105,14 @@ model JobData {
 }
 
 model GeneratedResult {
-  id          String   @id @default(cuid())
-  cvText      String
-  coverLetter String
-  summary     String?
-  createdAt   DateTime @default(now())
-  jobDataId   String   @unique
-  job         JobData  @relation(fields: [jobDataId], references: [id], onDelete: Cascade)
+  id                 String   @id @default(cuid())
+  relevantExperience String
+  relevantSkills     String
+  coverLetter        String
+  summary            String?
+  createdAt          DateTime @default(now())
+  jobDataId          String   @unique
+  job                JobData  @relation(fields: [jobDataId], references: [id], onDelete: Cascade)
 }
 
 model InterviewLog {
