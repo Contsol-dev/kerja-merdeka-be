@@ -72,6 +72,9 @@ export class MockInterviewService {
 
   async startInterview(userId: string, jobDataId: string) {
     try {
+      await prisma.interviewLog.deleteMany({ where: { jobDataId } });
+      await prisma.interviewInfo.deleteMany({ where: { jobDataId } });
+
       const user = await this.userService.getUserJobData(userId, jobDataId);
 
       if (!user.jobs.length) throw new ApiError(404, "Job data not found");
