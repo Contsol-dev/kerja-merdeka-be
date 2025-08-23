@@ -9,9 +9,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuM
 GET http://localhost:4000/api/lunos/test-lunos
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
-### Test Generate Docs (No Auth)
-GET http://localhost:4000/api/lunos/test-generate-docs/cmeob61of0000tgl81h8e4yiw/cmeob61um000atgl83iqaiiy6?update=true
-
 ### Test Mail
 GET http://localhost:4000/api/lunos/test-mail
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
@@ -38,8 +35,8 @@ GET http://localhost:4000/api/interview/feedback/cmem9lkxo000atg18ehsgm31e
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Get CV PDF (Replace with actual ID)
-GET http://localhost:4000/api/doc/cmeo9njvg000atgdc1dawsgs7?result=cv
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVvOW5qdWMwMDAwdGdkY2lmMDU4a3oxIiwiaWF0IjoxNzU1OTU0MDU5LCJleHAiOjE3NTk1NTQwNTl9.3ITuJmoT4RxwGhf5tIoI0f8jnOS6h5krwqS3jaAmjzI
+GET http://localhost:4000/api/doc/cmem9lkxo000atg18ehsgm31e?result=cv
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Get Cover Letter PDF (Replace with actual ID)
 GET http://localhost:4000/api/doc/cmem9lkxo000atg18ehsgm31e?result=cover-letter
@@ -70,8 +67,8 @@ POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "iqbal@example.com",
-  "password": "kerjamerdeka123"
+  "email": "iqbal.gozy@gmail.com",
+  "password": "password123"
 }
 
 ### Insert Personal Data
