@@ -64,6 +64,8 @@ describe("JOB ENDPOINT", () => {
     );
   });
 
+  let jobId: string;
+
   it("should insert job data 2", async () => {
     const res = await request(app)
       .post("/api/job")
@@ -83,6 +85,7 @@ describe("JOB ENDPOINT", () => {
       "deadline",
       jobData[1].deadline?.toISOString() || null
     );
+    jobId = res.body.data.id;
   });
 
   it("should get job list", async () => {
@@ -94,5 +97,46 @@ describe("JOB ENDPOINT", () => {
     expect(res.body.success).toBe(true);
     expect(res.body.data).toBeInstanceOf(Array);
     expect(res.body.data).toHaveLength(jobData.length);
+  });
+
+  it("should update job data 1", async () => {
+    const res = await request(app)
+      .put(`/api/job/${jobId}`)
+      .auth(token, { type: "bearer" })
+      .send({
+        ...jobData[0],
+        jobTitle: "Updated Software Engineer",
+      });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toHaveProperty("id", jobId);
+    expect(res.body.data).toHaveProperty(
+      "jobTitle",
+      "Updated Software Engineer"
+    );
+  });
+
+  it("should get job data 1", async () => {
+    const res = await request(app)
+      .get(`/api/job/${jobId}`)
+      .auth(token, { type: "bearer" });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toHaveProperty("id", jobId);
+    expect(res.body.data).toHaveProperty(
+      "jobTitle",
+      "Updated Software Engineer"
+    );
+  });
+
+  it("should delete job data 1", async () => {
+    const res = await request(app)
+      .delete(`/api/job/${jobId}`)
+      .auth(token, { type: "bearer" });
+
+    expect(res.statusCode).toBe(204);
+    expect(res.body.success).toBe(true);
   });
 });

@@ -3,23 +3,23 @@ GET http://localhost:4000/api/
 
 ### Lunos - Discover Models
 GET http://localhost:4000/api/lunos/discover-models
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Test Lunos
 GET http://localhost:4000/api/lunos/test-lunos
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Test Mail
 GET http://localhost:4000/api/lunos/test-mail
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Start Interview (Replace with actual ID)
 POST http://localhost:4000/api/interview/start/cmem9lkxo000atg18ehsgm31e
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Answer Interview (Replace with actual ID and answer)
 POST http://localhost:4000/api/interview/answer/cmem9lkxo000atg18ehsgm31e
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 Content-Type: application/json
 
 {
@@ -27,20 +27,20 @@ Content-Type: application/json
 }
 
 ### Get Interview Logs (Replace with actual ID)
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 GET http://localhost:4000/api/interview/logs/cmem9lkxo000atg18ehsgm31e
 
 ### Get Interview Feedback (Replace with actual ID)
 GET http://localhost:4000/api/interview/feedback/cmem9lkxo000atg18ehsgm31e
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Get CV PDF (Replace with actual ID)
 GET http://localhost:4000/api/doc/cmem9lkxo000atg18ehsgm31e?result=cv
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Get Cover Letter PDF (Replace with actual ID)
 GET http://localhost:4000/api/doc/cmem9lkxo000atg18ehsgm31e?result=cover-letter
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Get Summary (Replace with actual ID)
 GET http://localhost:4000/api/doc/cmem9lkxo000atg18ehsgm31e?result=summary
@@ -48,7 +48,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtO
 
 ### Send Jobpack (Replace with actual ID)
 GET http://localhost:4000/api/jobpack/cmem9lkxo000atg18ehsgm31e
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Register
 POST http://localhost:4000/api/auth/register
@@ -67,19 +67,19 @@ POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "iqbal@example.com",
-  "password": "kerjamerdeka123"
+  "email": "iqbal.gozy@gmail.com",
+  "password": "password123"
 }
 
 ### Insert Personal Data
 POST http://localhost:4000/api/user/personal
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 Content-Type: application/json
 
 {
-  "email": "testuser@example.com",
+  "email": "iqbal.gozy@gmail.com",
   "phone": "1234567890",
-  "name": "Test User",
+  "name": "Iqbal Ghozy",
   "address": null,
   "linkedin": null,
   "portfolio": null
@@ -87,22 +87,24 @@ Content-Type: application/json
 
 ### Insert Experiences Data
 POST http://localhost:4000/api/user/experience
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 Content-Type: application/json
 
 [
   {
-    "jobTitle": "Software Engineer",
+    "title": "Software Engineer",
     "company": "Tech Company",
-    "location": "Remote",
+    "type": "WORK",
+    "status": "CONTRACT",
     "startDate": "2023-12-31T00:00:00.000Z",
-    "endDate": "2024-12-31T00:00:00.000Z",
+    "endDate": null,
     "description": "Developed web applications"
   },
   {
-    "jobTitle": "Senior Software Engineer",
+    "title": "Senior Software Engineer",
     "company": "Another Tech Company",
-    "location": null,
+    "type": "WORK",
+    "status": "INTERNSHIP",
     "startDate": "2021-02-01T00:00:00.000Z",
     "endDate": null,
     "description": null
@@ -111,49 +113,49 @@ Content-Type: application/json
 
 ### Insert Educations Data
 POST http://localhost:4000/api/user/education
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 Content-Type: application/json
 
 [
   {
     "degree": "Bachelor's Degree",
-    "fieldOfStudy": "Computer Science",
-    "institution": "Tech University",
-    "startDate": "2018-01-01T00:00:00.000Z",
-    "endDate": "2022-01-01T00:00:00.000Z"
+    "fieldOfStudy": "Information Technology",
+    "institution": "Global Tech University",
+    "startDate": "2017-08-01T00:00:00.000Z",
+    "endDate": null
   },
   {
     "degree": "Master's Degree",
-    "fieldOfStudy": "Software Engineering",
-    "institution": "Another Tech University",
-    "startDate": "2022-02-01T00:00:00.000Z",
-    "endDate": null
+    "fieldOfStudy": "Artificial Intelligence",
+    "institution": "Advanced Tech Institute",
+    "startDate": "2021-09-01T00:00:00.000Z",
+    "endDate": "2023-06-01T00:00:00.000Z"
   }
 ]
 
 ### Insert Skills Data
 POST http://localhost:4000/api/user/skills
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 Content-Type: application/json
 
 [
   {
-    "skill": "JavaScript",
+    "name": "JavaScript",
     "level": "BEGINNER"
   },
   {
-    "skill": "TypeScript",
-    "level": "BEGINNER"
+    "name": "TypeScript",
+    "level": "SPECIALIST"
   }
 ]
 
 ### Get User Data
 GET http://localhost:4000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 
 ### Insert Job Data
 POST http://localhost:4000/api/job
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
 Content-Type: application/json
 
 {
@@ -167,4 +169,18 @@ Content-Type: application/json
 
 ### Get Job List
 GET http://localhost:4000/api/job
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVtOHg3dm0wMDAwdGc1czYxaWhrbmE0IiwiaWF0IjoxNzU1ODMxODEyLCJleHAiOjE3NTk0MzE4MTJ9.Rf6PnSCVgeAQvwKpPatGT5uedOhwS1Y0eobVgmg6-l4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
+
+### Update Job Data
+PUT http://localhost:4000/api/job/replace_with_actual_job_id
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWVuMHo1aGswMDAwdGdzMHBpZTNjenNuIiwiaWF0IjoxNzU1OTIwOTUzLCJleHAiOjE3NTk1MjA5NTN9.3IeoQSOm7VEaiUtAxJS_Gl1-VPfMiy2izHpuWgJUboU
+Content-Type: application/json
+
+{
+  "jobTitle": "Updated Software Engineer",
+  "company": "Updated Tech Company",
+  "location": "Updated Remote",
+}
+
+### Delete Job Data
+DELETE http://localhost:4000/api/job/replace_with_actual_id
