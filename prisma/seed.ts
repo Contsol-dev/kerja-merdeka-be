@@ -63,6 +63,49 @@ async function main() {
         endDate: new Date("2025-01-31"),
         userId: user.id,
       },
+      {
+        type: ExperienceType.WORK,
+        status: ExperienceStatus.FULL_TIME,
+        title: "Fullstack Developer",
+        company: "Startup Hub",
+        description: "Built web apps with React and Express",
+        startDate: new Date("2024-01-01"),
+        endDate: new Date("2025-01-31"),
+        userId: user.id,
+      },
+      {
+        type: ExperienceType.WORK,
+        status: ExperienceStatus.FULL_TIME,
+        title: "Bartender",
+        company: "City Lounge",
+        description:
+          "Prepared and served beverages to customers, ensuring excellent customer service.",
+        startDate: new Date("2022-08-01"),
+        endDate: new Date("2023-12-31"),
+        userId: user.id,
+      },
+      {
+        type: ExperienceType.WORK,
+        status: ExperienceStatus.PART_TIME,
+        title: "Waiter",
+        company: "Gourmet Bistro",
+        description:
+          "Assisted customers with menu selections and ensured a pleasant dining experience.",
+        startDate: new Date("2024-01-01"),
+        endDate: new Date("2025-01-31"),
+        userId: user.id,
+      },
+      {
+        type: ExperienceType.WORK,
+        status: ExperienceStatus.FULL_TIME,
+        title: "Barista",
+        company: "Coffee Corner",
+        description:
+          "Crafted high-quality coffee beverages and maintained a clean workspace.",
+        startDate: new Date("2023-02-01"),
+        endDate: new Date("2024-02-28"),
+        userId: user.id,
+      },
     ],
   });
 

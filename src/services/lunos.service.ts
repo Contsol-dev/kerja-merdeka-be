@@ -35,7 +35,12 @@ export async function generateDocs(user: UserData) {
     const job = user.jobs[0];
 
     const prompt = `
-    Generate a CV, Cover Letter, and a Summary for the following user applying to the specified job:
+    Generate a Cover Letter, a Summary, and a list of relevant experiences and skills for the following user applying to the specified job.
+
+    - Select only the most relevant experiences and skills that match the job description.
+    - Rewrite the experience descriptions to be more professional, concise, and achievement-oriented (e.g., highlight impact, metrics, and responsibilities).
+    - Ensure the output is tailored to the target job.
+
     User Data:
     Name: ${user.name}
     Email: ${user.email}
@@ -43,29 +48,37 @@ export async function generateDocs(user: UserData) {
     Address: ${user.address}
     LinkedIn: ${user.linkedin}
     GitHub: ${user.portfolio}
+
     Education: ${user.educations
       .map(
         (edu) =>
           `${edu.degree} in ${edu.fieldOfStudy} from ${edu.institution} (${edu.startDate} - ${edu.endDate})`
       )
       .join(", ")}
+
     Experience: ${user.experiences
       .map(
         (exp) =>
-          `${exp.status} ${exp.title} ${exp.type} at ${exp.company} (${exp.startDate} - ${exp.endDate})`
+          `${exp.status} ${exp.title} ${exp.type} at ${exp.company} (${exp.startDate} - ${exp.endDate})
+    Description: ${exp.description}`
       )
-      .join(", ")}
+      .join("\n")}
+
     Skills: ${user.skills
       .map((skill) => `${skill.level} ${skill.name}`)
       .join(", ")}
-  
+
     Job Data:
     Title: ${job.jobTitle}
     Company: ${job.company}
     Location: ${job.location}
     Description: ${job.description}
-    
-    Return JSON with fields: cvText, coverLetter, summary
+
+    Return JSON with fields: 
+    - coverLetter
+    - summary
+    - relevantExperiences (array of objects with: title, company, startDate, endDate, location, description)
+    - relevantSkills (array of objects with: name, level)
     `;
 
     const completion = await lunos.chat.createCompletion({
