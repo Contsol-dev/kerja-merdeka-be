@@ -13,8 +13,7 @@ import { authMiddleware } from "../middlewares/auth.middleware";
 const router = Router();
 
 router.get("/", (req, res) => {
-  console.log("Received request for root endpoint");
-  res.send("Welcome to the Job Application API");
+  res.send("Selamat datang di API Kerja Merdeka");
 });
 router.use("/lunos", testLunosRouter);
 router.use("/lunos", authMiddleware, testLunosRouter);

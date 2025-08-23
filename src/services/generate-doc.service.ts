@@ -11,7 +11,8 @@ import logger from "../lib/logger";
 export class GenerateDocService {
   async generate(userData: UserData, update: boolean = false) {
     try {
-      if (!userData.jobs.length) throw new ApiError(400, "Job data not found");
+      if (!userData.jobs.length)
+        throw new ApiError(400, "Data Lowongan tidak ditemukan");
 
       const jobDataId = userData.jobs[0].id;
 

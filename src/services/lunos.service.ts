@@ -1,8 +1,7 @@
-import { ChatMessage, LunosClient } from "@lunos/client";
+import { ChatMessage } from "@lunos/client";
 import { UserData } from "../interfaces/interface";
 import lunos from "../lib/lunos";
 import logger from "../lib/logger";
-import { ApiError } from "../middlewares/error-handler.middleware";
 
 export async function discoverModels() {
   try {
@@ -23,7 +22,7 @@ export async function generateText(prompt: string): Promise<string> {
       temperature: 0.7,
     });
 
-    return resp.choices?.[0].message?.content || "No output";
+    return resp.choices?.[0].message?.content || "Tidak ada respon";
   } catch (error) {
     logger.error("Error generating text:", error);
     throw error;
@@ -35,52 +34,52 @@ export async function generateDocs(user: UserData) {
     const job = user.jobs[0];
 
     const prompt = `
-    Generate a Cover Letter, a Summary, and a list of relevant experiences and skills for the following user applying to the specified job.
+    Buatlah Surat Lamaran, Ringkasan, dan daftar pengalaman serta keterampilan yang relevan untuk pengguna berikut yang melamar pekerjaan yang ditentukan.
 
-    - Select only the most relevant experiences and skills that match the job description.
-    - Rewrite the experience descriptions to be more professional, concise, and achievement-oriented (e.g., highlight impact, metrics, and responsibilities).
-    - Ensure the output is tailored to the target job.
+    - Pilih hanya pengalaman dan keterampilan yang paling relevan yang sesuai dengan deskripsi pekerjaan.
+    - Tulis ulang deskripsi pengalaman agar lebih profesional, ringkas, dan berorientasi pada pencapaian (misalnya, soroti dampak, metrik, dan tanggung jawab).
+    - Pastikan output disesuaikan dengan pekerjaan yang dituju.
 
-    User Data:
-    Name: ${user.name}
+    Data Pengguna:
+    Nama: ${user.name}
     Email: ${user.email}
-    Phone: ${user.phone}
-    Address: ${user.address}
+    Telepon: ${user.phone}
+    Alamat: ${user.address}
     LinkedIn: ${user.linkedin}
     GitHub: ${user.portfolio}
-    Education: ${user.educations
+    Pendidikan: ${user.educations
       .map(
         (edu) =>
-          `${edu.degree} in ${edu.fieldOfStudy} from ${edu.institution} (${edu.startDate} - ${edu.endDate})`
+          `${edu.degree} di bidang ${edu.fieldOfStudy} dari ${edu.institution} (${edu.startDate} - ${edu.endDate})`
       )
       .join(", ")}
-    Experience: ${user.experiences
+    Pengalaman: ${user.experiences
       .map(
         (exp) =>
-          `${exp.status} ${exp.title} ${exp.type} at ${exp.company} (${exp.startDate} - ${exp.endDate})
-    Description: ${exp.description}`
+          `${exp.status} ${exp.title} ${exp.type} di ${exp.company} (${exp.startDate} - ${exp.endDate})
+    Deskripsi: ${exp.description}`
       )
       .join("\n")}
 
-    Skills: ${user.skills
+    Keterampilan: ${user.skills
       .map((skill) => `${skill.level} ${skill.name}`)
       .join(", ")}
-    Job Data:
-    Title: ${job.jobTitle}
-    Company: ${job.company}
-    Location: ${job.location}
-    Description: ${job.description}
-    Return JSON with fields: 
+    Data Pekerjaan:
+    Judul: ${job.jobTitle}
+    Perusahaan: ${job.company}
+    Lokasi: ${job.location}
+    Deskripsi: ${job.description}
+    Kembalikan JSON dengan bidang: 
     - coverLetter
     - summary
-    - relevantExperiences (array of objects with: title, company, startDate, endDate, location, description)
-    - relevantSkills (array of objects with: name, level)
+    - relevantExperiences (array objek dengan: title, company, startDate, endDate, location, description)
+    - relevantSkills (array objek dengan: name, level)
     `;
 
     const completion = await lunos.chat.createCompletion({
       model: "openai/gpt-4o-mini",
       messages: [
-        { role: "system", content: "You are a document generator assistant." },
+        { role: "system", content: "Anda adalah asisten pembuat dokumen." },
         { role: "user", content: prompt },
       ],
       response_format: { type: "json_object" },

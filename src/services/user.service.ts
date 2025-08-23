@@ -12,7 +12,7 @@ import { ApiError } from "../middlewares/error-handler.middleware";
 export class UserService {
   checkCurrentUser(req: AuthRequest) {
     const userId = req.user?.userId;
-    if (!userId) throw new ApiError(401, "Unauthorized: User ID not found");
+    if (!userId) throw new ApiError(401, "Kredensial tidak valid");
 
     return userId;
   }
@@ -111,7 +111,7 @@ export class UserService {
         },
       });
 
-      if (!user) throw new ApiError(404, "User not found");
+      if (!user) throw new ApiError(404, "Pengguna tidak ditemukan");
 
       return user;
     } catch (error: any) {
@@ -134,7 +134,7 @@ export class UserService {
         },
       });
 
-      if (!user) throw new ApiError(404, "User not found");
+      if (!user) throw new ApiError(404, "Pengguna tidak ditemukan");
 
       return user;
     } catch (error: any) {
@@ -160,11 +160,14 @@ export class UserService {
         },
       });
 
-      if (!user) throw new ApiError(404, "User not found");
+      if (!user) throw new ApiError(404, "Pengguna tidak ditemukan");
       if (user.jobs.length === 0)
-        throw new ApiError(404, "Job data not found for the user");
+        throw new ApiError(404, "Data lowongan tidak ditemukan");
       if (user.jobs[0].results === null)
-        throw new ApiError(404, "User generated data not found");
+        throw new ApiError(
+          404,
+          "Data yang dihasilkan pengguna tidak ditemukan"
+        );
 
       return user;
     } catch (error: any) {

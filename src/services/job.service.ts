@@ -39,7 +39,7 @@ export class JobService {
         where: { id: jobDataId, userId },
       });
 
-      if (!job) throw new ApiError(404, "Job data not found");
+      if (!job) throw new ApiError(404, "Data Lowongan tidak ditemukan");
 
       return job;
     } catch (error: any) {

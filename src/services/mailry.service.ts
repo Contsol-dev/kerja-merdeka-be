@@ -3,7 +3,6 @@ import env from "../configs/env.config";
 import FormData from "form-data";
 import { SendMailPayload } from "../interfaces/interface";
 import logger from "../lib/logger";
-import { ApiError } from "../middlewares/error-handler.middleware";
 
 export async function handleAttachment(
   filename: string,

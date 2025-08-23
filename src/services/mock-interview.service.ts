@@ -17,13 +17,13 @@ export class MockInterviewService {
 
   async userJobCheck(userId: string, jobDataId: string) {
     if (!userId || !jobDataId)
-      throw new ApiError(400, "User ID and Job Data ID are required");
+      throw new ApiError(400, "ID Pengguna dan ID Lowongan diperlukan");
 
     const job = await prisma.jobData.findUnique({
       where: { id: jobDataId, userId },
     });
 
-    if (!job) throw new ApiError(404, "Job data not found for the user");
+    if (!job) throw new ApiError(404, "Data Lowongan tidak ditemukan");
 
     return;
   }
@@ -33,7 +33,7 @@ export class MockInterviewService {
       .map(
         (exp) =>
           `- ${exp.title} at ${exp.company} (${exp.startDate.getFullYear()} - ${
-            exp.endDate?.getFullYear() || "Present"
+            exp.endDate?.getFullYear() || "Sekarang"
           })`
       )
       .join("\n");
@@ -44,7 +44,7 @@ export class MockInterviewService {
           `- ${edu.degree} in ${edu.fieldOfStudy} from ${
             edu.institution
           } (${edu.startDate.getFullYear()} - ${
-            edu.endDate?.getFullYear() || "Present"
+            edu.endDate?.getFullYear() || "Sekarang"
           })`
       )
       .join("\n");
@@ -52,20 +52,20 @@ export class MockInterviewService {
     const skills = userData.skills.map((skill) => skill.name).join(", ");
 
     return `
-    Candidate Profile:
-    Name: ${userData.name}
+    Profil Kandidat:
+    Nama: ${userData.name}
 
-    Applied Job:
-    Title: ${userData.jobs[0].jobTitle}
-    Description: ${userData.jobs[0].description}
+    Lowongan yang Dilamar:
+    Judul: ${userData.jobs[0].jobTitle}
+    Deskripsi: ${userData.jobs[0].description}
 
-    Education:
+    Pendidikan:
     ${educations}
 
-    Experiences:
+    Pengalaman:
     ${experiences}
 
-    Skills:
+    Keterampilan:
     ${skills}
     `.trim();
   }
@@ -77,13 +77,14 @@ export class MockInterviewService {
 
       const user = await this.userService.getUserJobData(userId, jobDataId);
 
-      if (!user.jobs.length) throw new ApiError(404, "Job data not found");
+      if (!user.jobs.length)
+        throw new ApiError(404, "Data Lowongan tidak ditemukan");
 
       const systemPrompt = `
-    You are an interviewer for the role of ${user.jobs[0].jobTitle}.
-    Your goal is to assess the candidate's knowledge and skills based on their profile.
-    Ask one question at a time.
-    `;
+        Anda adalah pewawancara untuk posisi ${user.jobs[0].jobTitle}.
+        Tujuan Anda adalah untuk menilai pengetahuan dan keterampilan kandidat berdasarkan profil mereka.
+        Ajukan satu pertanyaan pada satu waktu.
+        `;
 
       const userJobContext = this.formatuserJobContext(user);
       await prisma.interviewInfo.create({
@@ -104,7 +105,7 @@ export class MockInterviewService {
         },
         {
           role: "user",
-          content: "Please start the interview with the first question.",
+          content: "Silakan mulai wawancara dengan pertanyaan pertama.",
         },
       ];
 
@@ -131,14 +132,16 @@ export class MockInterviewService {
         select: { context: true },
       });
 
-      if (!interviewInfo) throw new ApiError(404, "User job context not found");
+      if (!interviewInfo)
+        throw new ApiError(404, "Konteks wawancara tidak ditemukan");
 
       const lastLog = await prisma.interviewLog.findFirst({
         where: { jobDataId: jobDataId, answer: null },
         orderBy: { createdAt: "desc" },
       });
 
-      if (!lastLog) throw new ApiError(404, "No unanswered questions found");
+      if (!lastLog)
+        throw new ApiError(404, "Tidak ada pertanyaan yang belum terjawab");
 
       await prisma.interviewLog.update({
         where: { id: lastLog.id },
@@ -148,14 +151,15 @@ export class MockInterviewService {
       const messages: ChatCompletionMessageParam[] = [
         {
           role: "system",
-          content: "You are an interviewer conducting a job interview.",
+          content:
+            "Anda adalah pewawancara yang sedang melakukan wawancara kerja.",
         },
         { role: "user", content: interviewInfo.context },
         { role: "assistant", content: lastLog.question },
         { role: "user", content: answer },
         {
           role: "user",
-          content: "Please continue the interview with the next question.",
+          content: "Silakan lanjutkan wawancara dengan pertanyaan berikutnya.",
         },
       ];
 
@@ -204,27 +208,30 @@ export class MockInterviewService {
 
       const logs = await this.getInterviewLogs(jobDataId);
 
-      if (!logs.length) throw new ApiError(404, "No interview logs found");
+      if (!logs.length)
+        throw new ApiError(404, "Tidak ada log wawancara ditemukan");
 
       const qaPairs = logs
-        .map((log) => `Q: ${log.question}\nA: ${log.answer || "No answer yet"}`)
+        .map(
+          (log) => `Q: ${log.question}\nA: ${log.answer || "Belum ada jawaban"}`
+        )
         .join("\n\n");
 
       const messages: ChatMessage[] = [
         {
           role: "system",
           content: `
-        You are an experienced HR interviewer. 
-        You will evaluate the candidate's interview answers. 
-        Provide:
-        1. A detailed feedback (strengths, weaknesses, suggestions) as string, not array.
-        2. A score (0-100) based on the overall performance.
-        Output in JSON format: { "feedback": "...", "score": number }
+        Anda adalah pewawancara yang berpengalaman.
+        Anda akan mengevaluasi jawaban wawancara kandidat.
+        Berikan:
+        1. Umpan balik yang mendetail (kekuatan, kelemahan, saran) sebagai string, bukan array.
+        2. Skor (0-100) berdasarkan kinerja keseluruhan.
+        Output dalam format JSON: { "feedback": "...", "score": number }
         `.trim(),
         },
         {
           role: "user",
-          content: `Here are the interview Q&A logs:\n\n${qaPairs}`,
+          content: `Berikut adalah log tanya jawab wawancara:\n\n${qaPairs}`,
         },
       ];
 

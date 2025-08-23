@@ -27,27 +27,5 @@ router.get("/test-lunos", async (req, res) => {
     res.status(500).json({ error: "Lunos API failed", details: error });
   }
 });
-router.get(
-  "/test-generate-docs/:userId/:jobDataId",
-  async (req: AuthRequest, res) => {
-    const { userId, jobDataId } = req.params;
-    const { update } = req.query;
-    const isUpdate = update === "true";
-
-    logger.info(
-      `(GET RESULT) - User ID: ${userId}, Job Data ID: ${jobDataId} Attempting to test doc generate`
-    );
-
-    const userData = await userService.getUserJobData(userId, jobDataId);
-
-    logger.info(
-      `(GET RESULT) - User ID: ${userId}, Job Data ID: ${jobDataId} Fetched user data`
-    );
-
-    const existingResult = await generateService.generate(userData, isUpdate);
-
-    res.json(existingResult);
-  }
-);
 
 export default router;

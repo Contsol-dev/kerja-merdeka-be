@@ -20,7 +20,7 @@ export class SendJobpackService {
 
       const result = userData.jobs[0].results;
 
-      if (!result) throw new ApiError(404, "No results found");
+      if (!result) throw new ApiError(404, "Tidak ada hasil ditemukan");
 
       const cvBuffer = await generateDocService.renderCvBuffer(
         userData,
@@ -62,7 +62,7 @@ export class SendJobpackService {
 
       const resp = await sendMail({
         to: userData.email,
-        subject: `Job Application - ${userData.jobs[0].jobTitle} - ${userData.name}`,
+        subject: `Lamaran Pekerjaan - ${userData.jobs[0].jobTitle} - ${userData.name}`,
         htmlBody,
         plainBody,
         attachments: [cvAttachmentId, coverLetterAttachmentId],

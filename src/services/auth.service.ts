@@ -11,10 +11,10 @@ export class AuthService {
       const user = await prisma.user.findUnique({
         where: { email },
       });
-      if (!user) throw new ApiError(401, "Invalid credentials");
+      if (!user) throw new ApiError(401, "Kredensial tidak valid");
 
       const valid = await bcrypt.compare(password, user.password);
-      if (!valid) throw new ApiError(401, "Invalid credentials");
+      if (!valid) throw new ApiError(401, "Kredensial tidak valid");
 
       const expiresInMs =
         typeof env.JWT.EXPIRES_IN === "string"
@@ -48,7 +48,7 @@ export class AuthService {
   ) {
     try {
       if (password !== confPassword)
-        throw new ApiError(400, "Passwords do not match");
+        throw new ApiError(400, "Kata sandi tidak cocok");
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await prisma.user.create({
@@ -77,7 +77,7 @@ export class AuthService {
       return jwt.verify(token, env.JWT.SECRET) as { userId: string };
     } catch (error: any) {
       logger.error(`Token verification error: ${error.message}`);
-      throw new ApiError(401, "Invalid token");
+      throw new ApiError(401, "Kredensial tidak valid");
     }
   }
 }

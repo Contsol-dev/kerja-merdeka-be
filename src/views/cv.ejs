@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id"></html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -148,7 +148,7 @@
       <div class="title"><%= user.address %></div>
       <div class="contact-info">
         <span class="contact-item"
-          ><strong>Phone:</strong> <%= user.phone %></span
+          ><strong>Telepon:</strong> <%= user.phone %></span
         >
         <span class="contact-item">
           <strong>Email:</strong>
@@ -161,7 +161,7 @@
             href="<%= user.linkedin %>"
             target="_blank"
             rel="noopener noreferrer"
-            >Profile</a
+            >Profil</a
           >
         </span>
         <% } %> <% if (user.portfolio) { %>
@@ -171,17 +171,17 @@
             href="<%= user.portfolio %>"
             target="_blank"
             rel="noopener noreferrer"
-            >Profile</a
+            >Profil</a
           >
         </span>
         <% } %> <% if (user.portfolio) { %>
         <span class="contact-item">
-          <strong>Portfolio:</strong>
+          <strong>Portofolio:</strong>
           <a
             href="<%= user.portfolio %>"
             target="_blank"
             rel="noopener noreferrer"
-            >Website</a
+            >Situs Web</a
           >
         </span>
         <% } %>
@@ -189,36 +189,36 @@
     </header>
 
     <section>
-      <h2 class="section-title">Summary</h2>
+      <h2 class="section-title">Ringkasan</h2>
       <p><%= summary %></p>
     </section>
 
     <section>
-      <h2 class="section-title">Education</h2>
+      <h2 class="section-title">Pendidikan</h2>
       <% user.educations.forEach(edu => { %>
       <div class="education-item">
-        <div class="degree"><%= edu.degree %> in <%= edu.fieldOfStudy %></div>
+        <div class="degree"><%= edu.degree %> - <%= edu.fieldOfStudy %></div>
         <div class="institution">
           <%= edu.institution %> | <%= edu.startDate.toLocaleString('default', {
           month: 'short', year: 'numeric' }) %> - <%= edu.endDate ?
           edu.endDate.toLocaleString('default', { month: 'short', year:
-          'numeric' }) : 'Present' %>
+          'numeric' }) : 'Sekarang' %>
         </div>
       </div>
       <% }) %>
     </section>
 
     <section>
-      <h2 class="section-title">Experience</h2>
+      <h2 class="section-title">Pengalaman</h2>
       <% experiences.forEach(exp => { %>
       <div class="job">
         <div class="job-title"><%= exp.title %></div>
         <div class="company-info">
-          <%= exp.company %> | <%= exp.location %> | <%=
+          <%= exp.company %> | <%= exp.location %> | <%= 
           exp.startDate.toLocaleString('default', { month: 'short', year:
           'numeric' }) %> - <%= exp.endDate ?
           exp.endDate.toLocaleString('default', { month: 'short', year:
-          'numeric' }) : 'Present' %>
+          'numeric' }) : 'Sekarang' %>
         </div>
         <div class="job-description">
           <p><%= exp.description %></p>
@@ -228,7 +228,7 @@
     </section>
 
     <section>
-      <h2 class="section-title">Skills</h2>
+      <h2 class="section-title">Keahlian</h2>
       <ul>
         <% skills.forEach(skill => { %>
         <li><%= skill.name %></li>
@@ -238,8 +238,8 @@
 
     <footer>
       <p>
-        &copy; <%= new Date().getFullYear() %> <%= user.name %>. All rights
-        reserved.
+        &copy; <%= new Date().getFullYear() %> <%= user.name %>. Semua hak
+        dilindungi.
       </p>
     </footer>
   </body>

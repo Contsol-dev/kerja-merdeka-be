@@ -1,7 +1,6 @@
 import { ChatCompletionMessageParam } from "openai/resources/index";
 import openai from "../lib/openai";
 import logger from "../lib/logger";
-import { ApiError } from "../middlewares/error-handler.middleware";
 
 export async function chatCompletion(messages: ChatCompletionMessageParam[]) {
   try {
@@ -10,7 +9,7 @@ export async function chatCompletion(messages: ChatCompletionMessageParam[]) {
       model: "auto",
     });
 
-    return completion.choices[0].message.content || "No output";
+    return completion.choices[0].message.content || "Tidak ada respon";
   } catch (error: any) {
     logger.error("Failed to generate chat completion: " + error.message);
     throw error;
