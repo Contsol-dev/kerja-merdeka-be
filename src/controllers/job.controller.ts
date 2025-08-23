@@ -47,4 +47,66 @@ export class JobController {
       data: jobList,
     });
   }
+
+  static async getJobData(req: AuthRequest, res: Response) {
+    const userId = userService.checkCurrentUser(req);
+    const { jobDataId } = req.params;
+
+    logger.info(
+      `(GET JOB) - User ID: ${userId}, Job Data ID: ${jobDataId} Attempting to retrieve job data`
+    );
+
+    const jobData = await jobService.getJobData(userId, jobDataId);
+
+    logger.info(
+      `(GET JOB) - User ID: ${userId}, Job Data ID: ${jobDataId} Successfully retrieved job data`
+    );
+
+    res.status(200).json({
+      success: true,
+      data: jobData,
+    });
+  }
+
+  static async updateJobData(req: AuthRequest, res: Response) {
+    const userId = userService.checkCurrentUser(req);
+    const { jobDataId } = req.params;
+    const updateData: Partial<InsertJobDataReq> = req.body;
+
+    logger.info(
+      `(UPDATE JOB) - User ID: ${userId}, Job Data ID: ${jobDataId} Attempting to update job data`
+    );
+
+    const updatedJobData = await jobService.updateJobData(
+      userId,
+      jobDataId,
+      updateData
+    );
+
+    logger.info(
+      `(UPDATE JOB) - User ID: ${userId}, Job Data ID: ${jobDataId} Successfully updated job data`
+    );
+
+    res.status(200).json({
+      success: true,
+      data: updatedJobData,
+    });
+  }
+
+  static async deleteJobData(req: AuthRequest, res: Response) {
+    const userId = userService.checkCurrentUser(req);
+    const { jobDataId } = req.params;
+
+    logger.info(
+      `(DELETE JOB) - User ID: ${userId}, Job Data ID: ${jobDataId} Attempting to delete job data`
+    );
+
+    await jobService.deleteJobData(userId, jobDataId);
+
+    logger.info(
+      `(DELETE JOB) - User ID: ${userId}, Job Data ID: ${jobDataId} Successfully deleted job data`
+    );
+
+    res.status(204).send();
+  }
 }

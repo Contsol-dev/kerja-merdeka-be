@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { UserService } from "../services/user.service";
 import { GenerateDocService } from "../services/generate-doc.service";
 import { AuthRequest } from "../interfaces/interface";
@@ -10,8 +10,10 @@ const userService = new UserService();
 export class GenerateDocController {
   static async getResult(req: AuthRequest, res: Response) {
     const { jobDataId } = req.params;
-    const { result } = req.query;
+    const { result, update } = req.query;
+
     const userId = userService.checkCurrentUser(req);
+    const isUpdate = update === "true";
 
     logger.info(
       `(GET RESULT) - User ID: ${userId}, Job Data ID: ${jobDataId} Attempting to get ${result}`
@@ -23,7 +25,10 @@ export class GenerateDocController {
       `(GET RESULT) - User ID: ${userId}, Job Data ID: ${jobDataId} Fetched user data`
     );
 
-    const existingResult = await generateDocService.generate(userData);
+    const existingResult = await generateDocService.generate(
+      userData,
+      isUpdate
+    );
 
     logger.info(
       `(GET RESULT) - User ID: ${userId}, Job Data ID: ${jobDataId} Generated document`
@@ -31,14 +36,20 @@ export class GenerateDocController {
 
     switch (result) {
       case "cv":
-        generateDocService.generateCv(userData, existingResult?.summary, res);
+        generateDocService.generateCv(
+          userData,
+          existingResult?.summary,
+          res,
+          isUpdate
+        );
         break;
 
       case "cover-letter":
         generateDocService.generateCoverLetter(
           userData,
           existingResult?.coverLetter,
-          res
+          res,
+          isUpdate
         );
         break;
 
