@@ -24,7 +24,9 @@ export class SendJobpackService {
 
       const cvBuffer = await generateDocService.renderCvBuffer(
         userData,
-        result.summary
+        result.summary,
+        result.relevantExperience,
+        result.relevantSkills
       );
       const coverLetterBuffer =
         await generateDocService.renderCoverLetterBuffer(
