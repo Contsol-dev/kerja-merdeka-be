@@ -42,11 +42,15 @@ export class UserService {
 
   async insertCvExperience(userId: string, data: InsertCvExperienceReq[]) {
     try {
-      const experiences = await prisma.experience.createManyAndReturn({
-        data: data.map((exp: InsertCvExperienceReq) => ({
-          userId,
-          ...exp,
-        })),
+      const experiences = await prisma.$transaction(async (tx) => {
+        await tx.experience.deleteMany({ where: { userId } });
+
+        return await tx.experience.createManyAndReturn({
+          data: data.map((exp: InsertCvExperienceReq) => ({
+            userId,
+            ...exp,
+          })),
+        });
       });
 
       return experiences;
@@ -58,11 +62,15 @@ export class UserService {
 
   async insertCvEducation(userId: string, data: InsertCvEducationReq[]) {
     try {
-      const educations = await prisma.education.createManyAndReturn({
-        data: data.map((edu: InsertCvEducationReq) => ({
-          userId,
-          ...edu,
-        })),
+      const educations = await prisma.$transaction(async (tx) => {
+        await tx.education.deleteMany({ where: { userId } });
+
+        return await tx.education.createManyAndReturn({
+          data: data.map((edu: InsertCvEducationReq) => ({
+            userId,
+            ...edu,
+          })),
+        });
       });
 
       return educations;
@@ -74,11 +82,15 @@ export class UserService {
 
   async insertCvSkill(userId: string, data: InsertCvSkillReq[]) {
     try {
-      const skills = await prisma.skill.createManyAndReturn({
-        data: data.map((skill: InsertCvSkillReq) => ({
-          userId,
-          ...skill,
-        })),
+      const skills = await prisma.$transaction(async (tx) => {
+        await tx.skill.deleteMany({ where: { userId } });
+
+        return await tx.skill.createManyAndReturn({
+          data: data.map((skill: InsertCvSkillReq) => ({
+            userId,
+            ...skill,
+          })),
+        });
       });
 
       return skills;
