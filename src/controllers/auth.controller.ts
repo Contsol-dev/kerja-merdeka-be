@@ -1,6 +1,7 @@
 import e, { Request, Response } from "express";
 import { AuthService } from "../services/auth.service";
 import logger from "../lib/logger";
+import { AuthRequest } from "../interfaces/interface";
 
 const authService = new AuthService();
 
@@ -33,5 +34,9 @@ export class AuthController {
     logger.info(`(LOGIN) - User email: ${email} Login successful`);
 
     res.status(200).json({ success: true, token, user });
+  }
+
+  static async getMe(req: AuthRequest, res: Response) {
+    return res.status(200).json({ success: true, user: req.user });
   }
 }
