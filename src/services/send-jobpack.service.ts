@@ -44,7 +44,7 @@ export class SendJobpackService {
       );
 
       const htmlBody = await ejs.renderFile(
-        path.join(__dirname, "..", "views", "email", "jobpack.ejs"),
+        path.join(process.cwd(), "src", "views", "email", "jobpack.ejs"),
         {
           user: userData,
           jobTitle: userData.jobs[0].jobTitle,
