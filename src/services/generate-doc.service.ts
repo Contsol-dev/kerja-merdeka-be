@@ -48,6 +48,10 @@ export class GenerateDocService {
     }
   }
 
+  private getViewPath(filename: string) {
+    return path.join(process.cwd(), "src", "views", filename);
+  }
+
   async renderCvBuffer(
     userData: UserData,
     summary: string | null,
@@ -58,17 +62,18 @@ export class GenerateDocService {
       const experiences = JSON.parse(relevantExperience);
       const skills = JSON.parse(relevantSkills);
 
-      const html = await ejs.renderFile(
-        path.join(__dirname, "..", "views", "cv.ejs"),
-        {
-          user: userData,
-          summary,
-          experiences,
-          skills,
-        }
-      );
+      const html = await ejs.renderFile(this.getViewPath("cv.ejs"), {
+        user: userData,
+        summary,
+        experiences,
+        skills,
+      });
 
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      });
+
       const page = await browser.newPage();
       await page.setContent(html);
       const pdfBuffer = await page.pdf({ format: "A4" });
@@ -131,16 +136,17 @@ export class GenerateDocService {
     coverLetter: string | null
   ) {
     try {
-      const html = await ejs.renderFile(
-        path.join(__dirname, "..", "views", "cover-letter.ejs"),
-        {
-          name: userData.name,
-          coverLetter,
-          email: userData.email,
-        }
-      );
+      const html = await ejs.renderFile(this.getViewPath("cover-letter.ejs"), {
+        name: userData.name,
+        coverLetter,
+        email: userData.email,
+      });
 
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      });
+
       const page = await browser.newPage();
       await page.setContent(html);
       const pdfBuffer = await page.pdf({ format: "A4" });
