@@ -104,6 +104,9 @@ export class UserService {
     try {
       const user = await prisma.user.findUnique({
         where: { id: userId },
+        omit: {
+          password: true,
+        },
         include: {
           educations: true,
           experiences: true,
